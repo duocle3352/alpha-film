@@ -1,0 +1,41 @@
+.wrapper {
+    margin-bottom: 20px;
+}
+
+.inner {
+    display: flex;
+    border-radius: var(--radius-6);
+    overflow: hidden;
+
+    &:hover {
+        filter: brightness(0.5);
+    }
+}
+
+.img {
+    width: 100%;
+}
+
+.info {
+    margin-top: 4px;
+}
+
+.name {
+    font-size: 1.6rem;
+    font-weight: 700;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+
+    &:hover {
+        color: var(--blue);
+    }
+}
+
+.time {
+    font-size: 1.6rem;
+    color: var(--text-dark-alpha);
+}

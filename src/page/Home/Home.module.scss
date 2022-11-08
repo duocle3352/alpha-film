@@ -1,30 +1,11 @@
-.popper {
-    padding-top: 30px;
-}
-
-.header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.header__inner {
-    display: flex;
-    align-items: center;
-}
-
-.title {
-    color: var(--text-dark);
-    margin-right: 20px;
-    text-transform: capitalize;
-    user-select: none;
-}
-
+// select place
 .selector__wrap {
-    display: flex;
+    display: inline-block;
     border: 1px solid;
     border-radius: var(--radius-999);
     overflow: hidden;
+
+    margin-bottom: 10px;
 }
 
 .btn__wrap {
@@ -47,7 +28,7 @@
     right: 0;
 
     visibility: hidden;
-    background-color: var(--blue-bg);
+    background: var(--blue-bg);
     border-radius: var(--radius-999);
     transform: translateX(100%);
     z-index: -1;
@@ -57,17 +38,18 @@
     transform: translateX(-100%);
 }
 
-.view-more {
-    font-size: 1.4rem;
+.list-item {
+    height: 650px;
+    overflow: hidden;
+}
+
+.list-item.more {
+    height: unset;
+}
+
+.show-more {
     display: flex;
-    align-items: center;
-    line-height: 2rem;
-    color: var(--text-dark);
+    justify-content: center;
 
-    // color: #2cbbd0;
-
-    &:hover {
-        color: #2cbbd0;
-        text-decoration: underline;
-    }
+    margin-top: 10px;
 }
