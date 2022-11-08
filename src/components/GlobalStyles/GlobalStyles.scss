@@ -1,0 +1,90 @@
+@import 'normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap');
+@import './GridSytem.scss';
+
+:root {
+    // font family
+    --font-family: 'Inter', sans-serif;
+
+    // theme dark
+    // color
+    --white: #fff;
+    --blue: #2cbbd0;
+    // text
+    // --text-light: #fff;
+    // --text-light-alpha: #aaa;
+    --text-dark: #0f0f0f;
+    --text-dark-alpha: #606060;
+    // bg
+    --dark-bg: #181818;
+    --active-bg: rgba(0, 0, 0, 0.05);
+    --blue-bg: #2cbbd0;
+    // border
+    --border: #ccc;
+    --border-active: #333;
+    --separate: rgba(0, 0, 0, 0.1);
+    --radius-6: 6px;
+    --radius-10: 10px;
+    --radius-999: 999px;
+
+    // size
+    --header-hight: 56px;
+    --header-margin: 50px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: 1.6rem;
+    line-height: 1.5;
+    text-rendering: optimizespeed;
+    color: var(--text-color);
+    // background-color: #181818;
+    overflow-y: overlay;
+}
+
+// Scrollbar css
+html *::-webkit-scrollbar {
+    width: 16px;
+}
+
+html *::-webkit-scrollbar-thumb {
+    height: 56px;
+    border-radius: 8px;
+    border: 4px solid transparent;
+    background-clip: content-box;
+    background-color: hsl(0, 0%, 67%);
+}
+
+// html *::-webkit-scrollbar-track {
+//     border-radius: 0;
+//     background-color: rgba(0, 0, 0, 0);
+// }
+
+// custom tags
+button,
+input,
+[tabindex] {
+    outline: none;
+    background-color: unset;
+    border: none;
+    cursor: pointer;
+}
+
+a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}

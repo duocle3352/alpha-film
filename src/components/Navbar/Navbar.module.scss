@@ -1,0 +1,18 @@
+.wrapper {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+}
+
+.wrapper.separate::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+    right: 20px;
+
+    height: 1px;
+    background-color: var(--separate);
+}

@@ -1,0 +1,15 @@
+.wrapper {
+    display: flex;
+    overflow-x: hidden;
+}
+
+.container {
+    flex: 1;
+}
+
+.main {
+    height: calc(100vh - var(--header-hight));
+    margin-top: var(--header-hight);
+    padding: 10px 30px;
+    overflow-y: overlay;
+}
