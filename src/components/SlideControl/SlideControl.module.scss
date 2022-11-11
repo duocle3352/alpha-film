@@ -1,0 +1,23 @@
+.control {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+
+    display: flex;
+    align-items: center;
+
+    font-size: 3rem;
+    color: var(--text-dark);
+    background-color: var(--dark-alpha-bg);
+    padding: 4px 0;
+
+    &:hover {
+        background-color: var(--blue-bg);
+    }
+}
+
+.control.right {
+    right: 0;
+    left: unset;
+}

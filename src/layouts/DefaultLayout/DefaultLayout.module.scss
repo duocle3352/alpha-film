@@ -9,7 +9,9 @@
 
 .main {
     height: calc(100vh - var(--header-hight));
+    width: calc(100vw - var(--sidebar-width));
     margin-top: var(--header-hight);
-    padding: 10px 30px;
+    padding: 20px 28px;
     overflow-y: overlay;
+    overflow-x: hidden;
 }

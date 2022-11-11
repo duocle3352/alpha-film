@@ -6,10 +6,13 @@ import style from './AlphaTitle.module.scss';
 
 const cx = classNames.bind(style);
 
-function AlphaTitle({ title, link }) {
+function AlphaTitle({ title, link, children }) {
     return (
         <div className={cx('header')}>
-            <h2 className={cx('title')}>{title}</h2>
+            <div className={cx('inner')}>
+                <h2 className={cx('title')}>{title}</h2>
+                {children}
+            </div>
             {link && (
                 <Link to={link} className={cx('view-more')}>
                     View more
@@ -23,6 +26,7 @@ function AlphaTitle({ title, link }) {
 AlphaTitle.propTypes = {
     title: PropTypes.string.isRequired,
     link: PropTypes.string,
+    children: PropTypes.node,
 };
 
 export default AlphaTitle;

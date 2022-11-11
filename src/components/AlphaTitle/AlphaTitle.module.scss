@@ -3,7 +3,13 @@
     align-items: center;
     justify-content: space-between;
 
-    padding-bottom: 6px;
+    padding-bottom: 20px;
+    padding-top: 10px;
+}
+
+.inner {
+    display: flex;
+    align-items: center;
 }
 
 .title {

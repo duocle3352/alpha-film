@@ -14,7 +14,11 @@ function Card({ item }) {
                     className={cx('img')}
                     path={item.poster_path}
                     alt={item.original_title || item.name}
-                    size="200"
+                />
+                <Image
+                    className={cx('img-after')}
+                    path={item.backdrop_path}
+                    alt={item.original_title || item.name}
                 />
             </Link>
             <div className={cx('info')}>

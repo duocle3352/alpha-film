@@ -1,45 +1,15 @@
-// select place
-.selector__wrap {
-    display: inline-block;
-    border: 1px solid;
-    border-radius: var(--radius-999);
-    overflow: hidden;
-
-    margin-bottom: 10px;
-}
-
-.btn__wrap {
+.wrapper {
     position: relative;
-    display: inline-block;
-    border-radius: var(--radius-999);
+    overflow: hidden;
 }
 
-.btn__wrap.active .btn-bg {
-    transform: translateX(0);
-    transition: transform linear 0.2s;
-    visibility: unset;
-}
-
-.btn-bg {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    visibility: hidden;
-    background: var(--blue-bg);
-    border-radius: var(--radius-999);
-    transform: translateX(100%);
-    z-index: -1;
-}
-
-.btn-bg.right {
-    transform: translateX(-100%);
-}
-
+// cart item
 .list-item {
-    height: 650px;
+    transition: all linear 0.3s;
+}
+
+.list-item.less {
+    height: 676px;
     overflow: hidden;
 }
 

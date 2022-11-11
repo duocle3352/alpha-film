@@ -17,6 +17,7 @@
     --text-dark-alpha: #606060;
     // bg
     --dark-bg: #181818;
+    --dark-alpha-bg: #9999;
     --active-bg: rgba(0, 0, 0, 0.05);
     --blue-bg: #2cbbd0;
     // border
@@ -30,6 +31,7 @@
     // size
     --header-hight: 56px;
     --header-margin: 50px;
+    --sidebar-width: 240px;
 }
 
 * {
@@ -87,4 +89,7 @@ a {
 
 ul {
     list-style: none;
+}
+.nowrap {
+    flex-wrap: nowrap;
 }

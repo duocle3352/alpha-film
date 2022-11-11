@@ -1,20 +1,28 @@
 import classNames from 'classnames/bind';
-import { useEffect, useState } from 'react';
-
-import { PopperWrapper } from '~/components/PopperWrapper';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { AlphaTitle } from '~/components/AlphaTitle';
 import { Card } from '~/components/Card';
 import { Button } from '~/components/Button';
-import trendingService from '~/services/trendingService';
+import { Selector } from '~/components/Selector';
+import { trendingService, popularService } from '~/services';
 import style from './Home.module.scss';
+import { SlideControl } from '~/components/SlideControl';
 
 const cx = classNames.bind(style);
 
 function Home() {
     const [dayTrending, setDayTrending] = useState([]);
     const [weekTrending, setWeekTrending] = useState([]);
+    const [moviePopular, setMoviePopular] = useState([]);
+    const [tvPopular, setTvPopular] = useState([]);
+
+    const [showMoviePopular, setShowMoviePopular] = useState(true);
     const [showDayTrend, setShowDayTrend] = useState(true);
     const [showTrendMore, setShowTrendMore] = useState(false);
+    const [count, setCount] = useState(0);
+
+    const popularCartRef = useRef();
+    const popularCarWidth = popularCartRef.current?.offsetWidth;
 
     useEffect(() => {
         const fetchApi = async () => {
@@ -36,51 +44,114 @@ function Home() {
         fetchApi();
     }, []);
 
-    const handleShowTrend = (type) => {
-        if (type === 'day') {
+    useEffect(() => {
+        const fetchApi = async () => {
+            const results = await popularService('movie');
+
+            setMoviePopular(results);
+        };
+
+        fetchApi();
+    }, []);
+
+    useEffect(() => {
+        const fetchApi = async () => {
+            const results = await popularService('tv');
+
+            setTvPopular(results);
+        };
+
+        fetchApi();
+    }, []);
+
+    const handleShowTrend = useCallback((type) => {
+        if (type === 'Day') {
             setShowDayTrend(true);
         } else {
             setShowDayTrend(false);
         }
-    };
+    }, []);
+
+    const handleShowPopular = useCallback((type) => {
+        if (type === 'In Theaters') {
+            setShowMoviePopular(true);
+        } else {
+            setShowMoviePopular(false);
+        }
+    }, []);
 
     console.log('home reRENDER');
     return (
         <>
-            <PopperWrapper>
-                <AlphaTitle title="trending" />
+            {/* popular */}
+            <section className={cx('wrapper')}>
+                <AlphaTitle title="What's Popular" link="./">
+                    <Selector
+                        optionI="In Theaters"
+                        optionII="On TV"
+                        selectOptionI={showMoviePopular}
+                        onSelect={handleShowPopular}
+                    />
+                </AlphaTitle>
 
-                <div className={cx('selector__wrap')}>
-                    <div className={cx('btn__wrap', { active: showDayTrend })}>
-                        <div className={cx('btn-bg')} />
-                        <Button text onClick={() => handleShowTrend('day')}>
-                            Day
-                        </Button>
-                    </div>
-                    <div className={cx('btn__wrap', { active: !showDayTrend })}>
-                        <div className={cx('btn-bg', 'right')} />
-                        <Button text onClick={() => handleShowTrend()}>
-                            Week
-                        </Button>
-                    </div>
-                </div>
+                {/* popular media cart */}
+                <ul
+                    className={cx('list-item', 'nowrap', 'row', 'sm-gutter')}
+                    style={{ transform: `translateX(calc(-${popularCarWidth}px * ${count}))` }}
+                >
+                    {showMoviePopular &&
+                        moviePopular.map((item) => (
+                            <li key={item.id} className={cx('col', 'l-2')} ref={popularCartRef}>
+                                <Card item={item} />
+                            </li>
+                        ))}
+                    {!showMoviePopular &&
+                        tvPopular.map((item) => (
+                            <li key={item.id} className={cx('col', 'l-2')} ref={popularCartRef}>
+                                <Card item={item} />
+                            </li>
+                        ))}
+                </ul>
 
-                <div className={cx({ more: showTrendMore }, 'list-item', 'row', 'sm-gutter')}>
+                {/* cart control  */}
+                <SlideControl
+                    count={count}
+                    setCount={setCount}
+                    length={moviePopular.length}
+                    display={6}
+                />
+            </section>
+
+            {/* trending */}
+            <section className={cx('wrapper')}>
+                <AlphaTitle title="trending">
+                    <Selector
+                        optionI="Day"
+                        optionII="Week"
+                        selectOptionI={showDayTrend}
+                        onSelect={handleShowTrend}
+                    />
+                </AlphaTitle>
+
+                {/* trending media cart */}
+                <ul
+                    className={cx({ more: showTrendMore }, 'list-item', 'less', 'row', 'sm-gutter')}
+                >
                     {showDayTrend &&
                         dayTrending.map((item) => (
-                            <div key={item.id} className={cx('col', 'l-2')}>
+                            <li key={item.id} className={cx('col', 'l-2')}>
                                 <Card item={item} />
-                            </div>
+                            </li>
                         ))}
                     {!showDayTrend &&
                         weekTrending.map((item) => (
-                            <div key={item.id} className={cx('col', 'l-2')}>
+                            <li key={item.id} className={cx('col', 'l-2')}>
                                 <Card item={item} />
-                            </div>
+                            </li>
                         ))}
-                </div>
+                </ul>
 
-                {/* show more */}
+                {/* trending show more */}
                 <div className={cx('show-more')}>
                     {!showTrendMore && (
                         <Button primary onClick={() => setShowTrendMore(true)}>
@@ -93,7 +164,7 @@ function Home() {
                         </Button>
                     )}
                 </div>
-            </PopperWrapper>
+            </section>
         </>
     );
 }
