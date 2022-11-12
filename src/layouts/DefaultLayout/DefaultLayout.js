@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
-import Header from '../components/Header';
-import Sidebar from '../components/Sidebar';
+import { Header, Sidebar, Footer } from '../components';
 import style from './DefaultLayout.module.scss';
 
 const cx = classNames.bind(style);
@@ -12,7 +11,10 @@ function DefaultLayout({ children }) {
             <Sidebar />
             <div className={cx('container')}>
                 <Header />
-                <div className={cx('main')}>{children}</div>
+                <div className={cx('main')}>
+                    {children}
+                    <Footer />
+                </div>
             </div>
         </div>
     );
