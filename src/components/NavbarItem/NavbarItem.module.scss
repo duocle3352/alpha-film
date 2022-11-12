@@ -10,22 +10,24 @@
         font-weight: 600;
         background-color: var(--active-bg);
     }
-
-    &:focus-within .right-icon {
-        transform: translateY(-50%) rotate(180deg);
-    }
 }
 
 .wrapper.active {
+    position: relative;
     font-weight: 600;
     background-color: var(--active-bg);
 
-    .right-icon {
-        transform: translateY(-50%) rotate(180deg);
-    }
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0px;
 
-    .submenu {
-        height: unset;
+        width: 4px;
+        background-color: var(--blue);
+        border-bottom-right-radius: 999px;
+        border-top-right-radius: 999px;
     }
 }
 

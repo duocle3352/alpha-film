@@ -1,8 +1,9 @@
 const routes = {
     home: '/',
+    discovery: '/discovery',
+    community: '/community',
+    coming: '/coming',
     search: '/search',
-    tv: '/tv',
-    movie: '/movie',
     library: '/library',
     seen: '/seen',
     like: '/like',
