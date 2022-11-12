@@ -1,12 +1,14 @@
 import classNames from 'classnames/bind';
 import { useCallback, useEffect, useRef, useState } from 'react';
+
 import { AlphaTitle } from '~/components/AlphaTitle';
 import { Card } from '~/components/Card';
 import { Button } from '~/components/Button';
 import { Selector } from '~/components/Selector';
-import { trendingService, popularService } from '~/services';
-import style from './Home.module.scss';
 import { SlideControl } from '~/components/SlideControl';
+import { trendingService, popularService, topRateService } from '~/services';
+import images from '~/assets/image';
+import style from './Home.module.scss';
 
 const cx = classNames.bind(style);
 
@@ -15,8 +17,10 @@ function Home() {
     const [weekTrending, setWeekTrending] = useState([]);
     const [moviePopular, setMoviePopular] = useState([]);
     const [tvPopular, setTvPopular] = useState([]);
+    const [movieTopRate, setMovieTopRate] = useState([]);
+    const [tvTopRate, setTvTopRate] = useState([]);
 
-    const [showMoviePopular, setShowMoviePopular] = useState(true);
+    const [showMovie, setShowMovie] = useState(true);
     const [showDayTrend, setShowDayTrend] = useState(true);
     const [showTrendMore, setShowTrendMore] = useState(false);
     const [count, setCount] = useState(0);
@@ -24,6 +28,7 @@ function Home() {
     const popularCartRef = useRef();
     const popularCarWidth = popularCartRef.current?.offsetWidth;
 
+    // call trending api
     useEffect(() => {
         const fetchApi = async () => {
             const results = await trendingService('day');
@@ -44,6 +49,7 @@ function Home() {
         fetchApi();
     }, []);
 
+    // call popular api
     useEffect(() => {
         const fetchApi = async () => {
             const results = await popularService('movie');
@@ -64,6 +70,29 @@ function Home() {
         fetchApi();
     }, []);
 
+    // call top rate api
+    useEffect(() => {
+        const fetchApi = async () => {
+            const results = await topRateService('movie');
+
+            setMovieTopRate(results.slice(0, 10));
+        };
+
+        fetchApi();
+    }, []);
+
+    useEffect(() => {
+        const fetchApi = async () => {
+            const results = await topRateService('tv');
+
+            setTvTopRate(results.slice(0, 10));
+        };
+
+        fetchApi();
+    }, []);
+
+    //
+    //
     const handleShowTrend = useCallback((type) => {
         if (type === 'Day') {
             setShowDayTrend(true);
@@ -74,22 +103,28 @@ function Home() {
 
     const handleShowPopular = useCallback((type) => {
         if (type === 'In Theaters') {
-            setShowMoviePopular(true);
+            setShowMovie(true);
         } else {
-            setShowMoviePopular(false);
+            setShowMovie(false);
         }
     }, []);
 
     console.log('home reRENDER');
+
+    //
+    //
     return (
         <>
             {/* popular */}
-            <section className={cx('wrapper')}>
+            <section
+                className={cx('wrapper')}
+                style={{ backgroundImage: `url(${images.popularBg})` }}
+            >
                 <AlphaTitle title="What's Popular" link="./">
                     <Selector
                         optionI="In Theaters"
                         optionII="On TV"
-                        selectOptionI={showMoviePopular}
+                        selectOptionI={showMovie}
                         onSelect={handleShowPopular}
                     />
                 </AlphaTitle>
@@ -99,13 +134,13 @@ function Home() {
                     className={cx('list-item', 'nowrap', 'row', 'sm-gutter')}
                     style={{ transform: `translateX(calc(-${popularCarWidth}px * ${count}))` }}
                 >
-                    {showMoviePopular &&
+                    {showMovie &&
                         moviePopular.map((item) => (
                             <li key={item.id} className={cx('col', 'l-2')} ref={popularCartRef}>
                                 <Card item={item} />
                             </li>
                         ))}
-                    {!showMoviePopular &&
+                    {!showMovie &&
                         tvPopular.map((item) => (
                             <li key={item.id} className={cx('col', 'l-2')} ref={popularCartRef}>
                                 <Card item={item} />
@@ -139,13 +174,13 @@ function Home() {
                 >
                     {showDayTrend &&
                         dayTrending.map((item) => (
-                            <li key={item.id} className={cx('col', 'l-2')}>
+                            <li key={item.id} className={cx('col', 'l-2-4')}>
                                 <Card item={item} />
                             </li>
                         ))}
                     {!showDayTrend &&
                         weekTrending.map((item) => (
-                            <li key={item.id} className={cx('col', 'l-2')}>
+                            <li key={item.id} className={cx('col', 'l-2-4')}>
                                 <Card item={item} />
                             </li>
                         ))}
@@ -164,6 +199,34 @@ function Home() {
                         </Button>
                     )}
                 </div>
+            </section>
+
+            {/* top rate */}
+            <section className={cx('wrapper')}>
+                <AlphaTitle title="top rate" link="./">
+                    <Selector
+                        optionI="In Theaters"
+                        optionII="On TV"
+                        selectOptionI={showMovie}
+                        onSelect={handleShowPopular}
+                    />
+                </AlphaTitle>
+
+                {/* top rate media cart */}
+                <ul className={cx('list-item', 'less', 'row', 'sm-gutter')}>
+                    {showMovie &&
+                        movieTopRate.map((item) => (
+                            <li key={item.id} className={cx('col', 'l-2-4')}>
+                                <Card item={item} />
+                            </li>
+                        ))}
+                    {!showMovie &&
+                        tvTopRate.map((item) => (
+                            <li key={item.id} className={cx('col', 'l-2-4')}>
+                                <Card item={item} />
+                            </li>
+                        ))}
+                </ul>
             </section>
         </>
     );
