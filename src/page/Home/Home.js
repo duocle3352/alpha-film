@@ -6,6 +6,8 @@ import { Card } from '~/components/Card';
 import { Button } from '~/components/Button';
 import { Selector } from '~/components/Selector';
 import { SlideControl } from '~/components/SlideControl';
+import { ImageOriginal } from '~/components/ImageOriginal';
+import { MediaImages } from '~/components/MediaImages';
 import { trendingService, popularService, topRateService } from '~/services';
 import images from '~/assets/image';
 import style from './Home.module.scss';
@@ -19,14 +21,20 @@ function Home() {
     const [tvPopular, setTvPopular] = useState([]);
     const [movieTopRate, setMovieTopRate] = useState([]);
     const [tvTopRate, setTvTopRate] = useState([]);
-
+    //
     const [showMovie, setShowMovie] = useState(true);
     const [showDayTrend, setShowDayTrend] = useState(true);
     const [showTrendMore, setShowTrendMore] = useState(false);
-    const [count, setCount] = useState(0);
+    //
+    const [popularCarCount, setPopularCarCount] = useState(0);
+    const [sliderCount, setSliderCount] = useState(0);
+    //
+    const sliderItems = [...weekTrending.slice(0, 6)];
 
     const popularCartRef = useRef();
+    const sliderRef = useRef();
     const popularCarWidth = popularCartRef.current?.offsetWidth;
+    const sliderWidth = sliderRef.current?.offsetWidth;
 
     // call trending api
     useEffect(() => {
@@ -115,6 +123,57 @@ function Home() {
     //
     return (
         <>
+            {/* slider */}
+            <section className={cx('wrapper')}>
+                {/* popular media cart */}
+                <ul
+                    className={cx('slider-list', 'nowrap', 'row', 'sm-gutter')}
+                    style={{ transform: `translateX(calc(-${sliderWidth}px * ${sliderCount}))` }}
+                >
+                    {sliderItems.map((item) => (
+                        <li
+                            key={item.id}
+                            className={cx('slider-item', 'col', 'l-12')}
+                            ref={sliderRef}
+                        >
+                            <ImageOriginal
+                                className={cx('slider-img')}
+                                path={item.backdrop_path}
+                                alt={item.original_title || item.original_name}
+                            />
+
+                            <div className={cx('display')}>
+                                <MediaImages
+                                    className={cx('display-img')}
+                                    type={item.media_type}
+                                    id={item.id}
+                                />
+                            </div>
+
+                            <div className={cx('slider-title')}>
+                                <h1 className={cx('slider-name')}>
+                                    {item.original_title || item.original_name}
+                                </h1>
+                                <Button to={`${item.media_type}/${item.id}`} primary large>
+                                    Watch Now
+                                </Button>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+
+                {/* cart control  */}
+                <SlideControl
+                    count={sliderCount}
+                    setCount={setSliderCount}
+                    length={sliderItems.length}
+                    display={1}
+                    step={1}
+                    delay={5000}
+                    auto
+                />
+            </section>
+
             {/* popular */}
             <section
                 className={cx('wrapper')}
@@ -130,30 +189,42 @@ function Home() {
                 </AlphaTitle>
 
                 {/* popular media cart */}
+
                 <ul
                     className={cx('list-item', 'nowrap', 'row', 'sm-gutter')}
-                    style={{ transform: `translateX(calc(-${popularCarWidth}px * ${count}))` }}
+                    style={{
+                        transform: `translateX(calc(-${popularCarWidth}px * ${popularCarCount}))`,
+                    }}
                 >
                     {showMovie &&
                         moviePopular.map((item) => (
-                            <li key={item.id} className={cx('col', 'l-2')} ref={popularCartRef}>
-                                <Card item={item} />
+                            <li
+                                key={item.id}
+                                className={cx('cart-item', 'col', 'l-2')}
+                                ref={popularCartRef}
+                            >
+                                <Card item={item} type="movie" />
                             </li>
                         ))}
                     {!showMovie &&
                         tvPopular.map((item) => (
-                            <li key={item.id} className={cx('col', 'l-2')} ref={popularCartRef}>
-                                <Card item={item} />
+                            <li
+                                key={item.id}
+                                className={cx('cart-item', 'col', 'l-2')}
+                                ref={popularCartRef}
+                            >
+                                <Card item={item} type="tv" />
                             </li>
                         ))}
                 </ul>
-
                 {/* cart control  */}
                 <SlideControl
-                    count={count}
-                    setCount={setCount}
+                    count={popularCarCount}
+                    setCount={setPopularCarCount}
                     length={moviePopular.length}
                     display={6}
+                    step={2}
+                    delay={3000}
                 />
             </section>
 
@@ -174,13 +245,13 @@ function Home() {
                 >
                     {showDayTrend &&
                         dayTrending.map((item) => (
-                            <li key={item.id} className={cx('col', 'l-2-4')}>
+                            <li key={item.id} className={cx('cart-item', 'col', 'l-2-4')}>
                                 <Card item={item} />
                             </li>
                         ))}
                     {!showDayTrend &&
                         weekTrending.map((item) => (
-                            <li key={item.id} className={cx('col', 'l-2-4')}>
+                            <li key={item.id} className={cx('cart-item', 'col', 'l-2-4')}>
                                 <Card item={item} />
                             </li>
                         ))}
@@ -213,17 +284,17 @@ function Home() {
                 </AlphaTitle>
 
                 {/* top rate media cart */}
-                <ul className={cx('list-item', 'less', 'row', 'sm-gutter')}>
+                <ul className={cx('list-item', 'row', 'sm-gutter')}>
                     {showMovie &&
                         movieTopRate.map((item) => (
-                            <li key={item.id} className={cx('col', 'l-2-4')}>
-                                <Card item={item} />
+                            <li key={item.id} className={cx('cart-item', 'col', 'l-2-4')}>
+                                <Card item={item} type="movie" />
                             </li>
                         ))}
                     {!showMovie &&
                         tvTopRate.map((item) => (
-                            <li key={item.id} className={cx('col', 'l-2-4')}>
-                                <Card item={item} />
+                            <li key={item.id} className={cx('cart-item', 'col', 'l-2-4')}>
+                                <Card item={item} type="tv" />
                             </li>
                         ))}
                 </ul>

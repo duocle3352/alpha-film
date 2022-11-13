@@ -6,13 +6,15 @@ import { memo, useEffect } from 'react';
 
 const cx = classNames.bind(style);
 
-function SlideControl({ count, setCount, length, display }) {
+function SlideControl({ count, setCount, length, display, step, delay, auto }) {
     useEffect(() => {
-        const timeout = setTimeout(() => {
-            handelIncrease();
-        }, 3000);
+        if (auto) {
+            const timeout = setTimeout(() => {
+                handelIncrease();
+            }, delay);
 
-        return () => clearTimeout(timeout);
+            return () => clearTimeout(timeout);
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [count]);
 
@@ -20,7 +22,7 @@ function SlideControl({ count, setCount, length, display }) {
         if (count === length - display) {
             setCount(0);
         } else {
-            setCount(count + 2);
+            setCount(count + step);
         }
     };
 
@@ -29,7 +31,7 @@ function SlideControl({ count, setCount, length, display }) {
             if (count === 0) {
                 setCount(length - display);
             } else {
-                setCount(count - 2);
+                setCount(count - step);
             }
         } else {
             handelIncrease();
@@ -52,6 +54,9 @@ SlideControl.propTypes = {
     setCount: PropTypes.func.isRequired,
     length: PropTypes.number.isRequired,
     display: PropTypes.number.isRequired,
+    step: PropTypes.number.isRequired,
+    delay: PropTypes.number.isRequired,
+    auto: PropTypes.bool,
 };
 
 export default memo(SlideControl);
