@@ -39,16 +39,50 @@
     }
 }
 
-.slider-title {
+.slider-info {
     position: absolute;
     top: 50%;
-    left: 70px;
+    right: 70px;
     transform: translateY(-50%);
+
+    width: 40%;
+    padding: 10px;
+    border-radius: var(--radius-6);
+    &:hover {
+        background-color: #9999;
+    }
 }
 
-.slider-name {
+.slider-title {
     color: var(--white);
-    font-size: 5rem;
+    font-size: 4rem;
+    line-height: 4.4rem;
+}
+
+.slider-info__inner {
+    display: flex;
+}
+
+.slider-subtitle {
+    color: var(--white);
+    text-transform: capitalize;
+
+    + .slider-subtitle {
+        margin-left: 10px;
+    }
+}
+
+.slider-desc {
+    color: var(--text-dark);
+    font-size: 1.6rem;
+    font-weight: 1.8rem;
+    margin-bottom: 10px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
 }
 
 // cart item

@@ -1,5 +1,6 @@
 import classNames from 'classnames/bind';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { BsPlayCircle } from 'react-icons/bs';
 
 import { AlphaTitle } from '~/components/AlphaTitle';
 import { Card } from '~/components/Card';
@@ -98,8 +99,6 @@ function Home() {
 
         fetchApi();
     }, []);
-
-    //
     //
     const handleShowTrend = useCallback((type) => {
         if (type === 'Day') {
@@ -148,12 +147,27 @@ function Home() {
                                 />
                             </div>
 
-                            <div className={cx('slider-title')}>
-                                <h1 className={cx('slider-name')}>
+                            <div className={cx('slider-info')}>
+                                <h1 className={cx('slider-title')}>
                                     {item.original_title || item.original_name}
                                 </h1>
+                                <div className={cx('slider-info__inner')}>
+                                    <h4 className={cx('slider-subtitle')}>{item.media_type}</h4>
+                                    <h4
+                                        className={cx('slider-subtitle')}
+                                    >{`${item.vote_average.toFixed(1)}/10`}</h4>
+                                </div>
+                                <p className={cx('slider-desc')}>{item.overview}</p>
                                 <Button to={`${item.media_type}/${item.id}`} primary large>
-                                    Watch Now
+                                    Learn More
+                                </Button>
+                                <Button
+                                    to={`${item.media_type}/${item.id}`}
+                                    outline
+                                    large
+                                    leftIcon={<BsPlayCircle />}
+                                >
+                                    Play Trailer
                                 </Button>
                             </div>
                         </li>

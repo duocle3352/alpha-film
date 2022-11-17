@@ -29,9 +29,9 @@
 }
 
 .icon {
-    display: inline-block;
+    display: flex;
+    align-items: center;
     width: 24px;
-    text-align: center;
 }
 
 // Button types
@@ -48,7 +48,7 @@
 }
 
 .primary {
-    color: var(--text-dark);
+    color: var(--white);
     background-color: var(--blue-bg);
     border-color: var(--border);
 
@@ -59,17 +59,18 @@
 }
 
 .outline {
-    color: var(--text-dark);
+    color: var(--white);
     border-color: currentColor;
 
     &:hover {
         border-color: currentColor;
-        background-color: var(--blue-bg);
+        background-color: var(--dark-alpha-bg);
         opacity: 0.8;
     }
 }
 
 .text {
+    color: var(--text-dark);
     &:hover {
         text-decoration: underline;
     }
