@@ -1,6 +1,7 @@
 const routes = {
     home: '/',
-    discovery: '/discovery',
+    discovery: '/discovery/:type',
+    discoveryPage: '/discovery/:type/:page',
     community: '/community',
     coming: '/coming',
     search: '/search',

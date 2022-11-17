@@ -15,6 +15,7 @@ const publicRoutes = [
     { path: config.routes.home, component: Home },
     { path: config.routes.community, component: Community },
     { path: config.routes.discovery, component: Discovery },
+    { path: config.routes.discoveryPage, component: Discovery },
     { path: config.routes.coming, component: ComingSoon },
     { path: config.routes.search, component: Search },
     { path: config.routes.detail, component: Detail },

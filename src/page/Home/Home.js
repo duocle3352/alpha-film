@@ -117,8 +117,6 @@ function Home() {
         }
     }, []);
 
-    console.log('home reRENDER');
-
     //
     //
     return (
@@ -133,7 +131,7 @@ function Home() {
                     {sliderItems.map((item) => (
                         <li
                             key={item.id}
-                            className={cx('slider-item', 'col', 'l-12')}
+                            className={cx('slider-item', 'col', 'l-12', 'c-12')}
                             ref={sliderRef}
                         >
                             <ImageOriginal
@@ -200,7 +198,7 @@ function Home() {
                         moviePopular.map((item) => (
                             <li
                                 key={item.id}
-                                className={cx('cart-item', 'col', 'l-2')}
+                                className={cx('cart-item', 'col', 'l-2', 'c-3')}
                                 ref={popularCartRef}
                             >
                                 <Card item={item} type="movie" />
@@ -210,7 +208,7 @@ function Home() {
                         tvPopular.map((item) => (
                             <li
                                 key={item.id}
-                                className={cx('cart-item', 'col', 'l-2')}
+                                className={cx('cart-item', 'col', 'l-2', 'c-2')}
                                 ref={popularCartRef}
                             >
                                 <Card item={item} type="tv" />
@@ -223,7 +221,7 @@ function Home() {
                     setCount={setPopularCarCount}
                     length={moviePopular.length}
                     display={6}
-                    step={2}
+                    step={1}
                     delay={3000}
                 />
             </section>
@@ -245,13 +243,13 @@ function Home() {
                 >
                     {showDayTrend &&
                         dayTrending.map((item) => (
-                            <li key={item.id} className={cx('cart-item', 'col', 'l-2-4')}>
+                            <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'c-3')}>
                                 <Card item={item} />
                             </li>
                         ))}
                     {!showDayTrend &&
                         weekTrending.map((item) => (
-                            <li key={item.id} className={cx('cart-item', 'col', 'l-2-4')}>
+                            <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'c-3')}>
                                 <Card item={item} />
                             </li>
                         ))}
@@ -287,13 +285,13 @@ function Home() {
                 <ul className={cx('list-item', 'row', 'sm-gutter')}>
                     {showMovie &&
                         movieTopRate.map((item) => (
-                            <li key={item.id} className={cx('cart-item', 'col', 'l-2-4')}>
+                            <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'c-3')}>
                                 <Card item={item} type="movie" />
                             </li>
                         ))}
                     {!showMovie &&
                         tvTopRate.map((item) => (
-                            <li key={item.id} className={cx('cart-item', 'col', 'l-2-4')}>
+                            <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'c-3')}>
                                 <Card item={item} type="tv" />
                             </li>
                         ))}

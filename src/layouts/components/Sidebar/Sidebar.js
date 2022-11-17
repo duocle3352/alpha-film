@@ -1,7 +1,6 @@
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 import { BiBookBookmark, BiHelpCircle, BiTimeFive } from 'react-icons/bi';
-import { HiOutlineUsers } from 'react-icons/hi';
 import {
     AiOutlineHome,
     AiOutlineFieldTime,
@@ -15,6 +14,7 @@ import config from '~/config';
 import images from '~/assets/image';
 import { Navbar } from '~/components/Navbar';
 import { NavbarItem } from '~/components/NavbarItem';
+import { MV_THEATRES } from '~/constans';
 import style from './Sidebar.module.scss';
 
 const cx = classNames.bind(style);
@@ -40,14 +40,8 @@ function Sidebar() {
 
                     <NavbarItem
                         title="Discovery"
-                        link={config.routes.discovery}
+                        link={`/discovery/${MV_THEATRES}`}
                         leftIcon={<AiOutlineCompass />}
-                    />
-
-                    <NavbarItem
-                        title="Community"
-                        link={config.routes.community}
-                        leftIcon={<HiOutlineUsers />}
                     />
 
                     <NavbarItem

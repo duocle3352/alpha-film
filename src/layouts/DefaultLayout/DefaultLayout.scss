@@ -1,13 +1,13 @@
-.wrapper {
+.default-wrapper {
     display: flex;
     overflow-x: hidden;
 }
 
-.container {
+.default-container {
     flex: 1;
 }
 
-.main {
+.default-main {
     height: calc(100vh - var(--header-hight));
     width: calc(100vw - var(--sidebar-width));
     margin-top: var(--header-hight);
