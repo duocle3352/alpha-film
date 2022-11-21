@@ -17,6 +17,7 @@ const publicRoutes = [
     { path: config.routes.discovery, component: Discovery },
     { path: config.routes.discoveryPage, component: Discovery },
     { path: config.routes.coming, component: ComingSoon },
+    { path: config.routes.comingPage, component: ComingSoon },
     { path: config.routes.search, component: Search },
     { path: config.routes.detail, component: Detail },
     { path: config.routes.profile, component: Profile, layout: null },

@@ -1,14 +1,12 @@
 import classNames from 'classnames/bind';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { BsPlayCircle } from 'react-icons/bs';
 
 import { AlphaTitle } from '~/components/AlphaTitle';
 import { Card } from '~/components/Card';
 import { Button } from '~/components/Button';
 import { Selector } from '~/components/Selector';
 import { SlideControl } from '~/components/SlideControl';
-import { ImageOriginal } from '~/components/ImageOriginal';
-import { MediaImages } from '~/components/MediaImages';
+import { SlideComp } from '~/components/SlideComp';
 import { trendingService, popularService, topRateService } from '~/services';
 import images from '~/assets/image';
 import style from './Home.module.scss';
@@ -33,9 +31,7 @@ function Home() {
     const sliderItems = [...weekTrending.slice(0, 6)];
 
     const popularCartRef = useRef();
-    const sliderRef = useRef();
     const popularCarWidth = popularCartRef.current?.offsetWidth;
-    const sliderWidth = sliderRef.current?.offsetWidth;
 
     // call trending api
     useEffect(() => {
@@ -122,57 +118,7 @@ function Home() {
         <>
             {/* slider */}
             <section className={cx('wrapper')}>
-                {/* popular media cart */}
-                <ul
-                    className={cx('slider-list', 'nowrap', 'row', 'sm-gutter')}
-                    style={{ transform: `translateX(calc(-${sliderWidth}px * ${sliderCount}))` }}
-                >
-                    {sliderItems.map((item) => (
-                        <li
-                            key={item.id}
-                            className={cx('slider-item', 'col', 'l-12', 'c-12')}
-                            ref={sliderRef}
-                        >
-                            <ImageOriginal
-                                className={cx('slider-img')}
-                                path={item.backdrop_path}
-                                alt={item.original_title || item.original_name}
-                            />
-
-                            <div className={cx('display')}>
-                                <MediaImages
-                                    className={cx('display-img')}
-                                    type={item.media_type}
-                                    id={item.id}
-                                />
-                            </div>
-
-                            <div className={cx('slider-info')}>
-                                <h1 className={cx('slider-title')}>
-                                    {item.original_title || item.original_name}
-                                </h1>
-                                <div className={cx('slider-info__inner')}>
-                                    <h4 className={cx('slider-subtitle')}>{item.media_type}</h4>
-                                    <h4
-                                        className={cx('slider-subtitle')}
-                                    >{`${item.vote_average.toFixed(1)}/10`}</h4>
-                                </div>
-                                <p className={cx('slider-desc')}>{item.overview}</p>
-                                <Button to={`${item.media_type}/${item.id}`} primary large>
-                                    Learn More
-                                </Button>
-                                <Button
-                                    to={`${item.media_type}/${item.id}`}
-                                    outline
-                                    large
-                                    leftIcon={<BsPlayCircle />}
-                                >
-                                    Play Trailer
-                                </Button>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
+                <SlideComp listItem={sliderItems} count={sliderCount} />
 
                 {/* cart control  */}
                 <SlideControl

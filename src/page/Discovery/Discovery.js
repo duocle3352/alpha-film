@@ -2,7 +2,6 @@ import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Button } from '~/components/Button';
 import { Card } from '~/components/Card';
 import { Pagination } from '~/components/Pagination';
 import { moviesInTheatresService, tvAiringTodayService, tvOnTheAirService } from '~/services';
@@ -78,30 +77,6 @@ function Discovery() {
 
     return (
         <section>
-            <div className={cx('btn-wrap')}>
-                <Button
-                    primary={params.type === MV_THEATRES}
-                    outline={params.type !== MV_THEATRES}
-                    to={`/discovery/${MV_THEATRES}/${currentPage}`}
-                >
-                    Movies in theatres
-                </Button>
-                <Button
-                    primary={params.type === TV_AIRING}
-                    outline={params.type !== TV_AIRING}
-                    to={`/discovery/${TV_AIRING}/${currentPage}`}
-                >
-                    TV airing today
-                </Button>
-                <Button
-                    primary={params.type === TV_ON_THE_AIR}
-                    outline={params.type !== TV_ON_THE_AIR}
-                    to={`/discovery/${TV_ON_THE_AIR}/${currentPage}`}
-                >
-                    TV on the air
-                </Button>
-            </div>
-
             {params.type === MV_THEATRES && (
                 <ul className={cx('row', 'sm-gutter')}>
                     {movieNowPlaying.map((item) => (

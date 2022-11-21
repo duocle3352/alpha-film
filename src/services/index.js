@@ -4,5 +4,6 @@ export { default as popularService } from './popularService';
 export { default as trendingService } from './trendingService';
 export { default as topRateService } from './topRateService';
 export { default as moviesInTheatresService } from './moviesInTheatresService';
+export { default as moviesUpcomingService } from './moviesUpcomingService';
 export { default as tvAiringTodayService } from './tvAiringTodayService';
 export { default as tvOnTheAirService } from './tvOnTheAirService';

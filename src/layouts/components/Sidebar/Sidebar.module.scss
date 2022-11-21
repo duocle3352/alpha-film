@@ -25,6 +25,65 @@
     overflow: overlay;
 }
 
+.navbar-children {
+    position: relative;
+}
+
+.navbar-children.show {
+    .navbar-item {
+        display: block;
+    }
+
+    .icon-right {
+        transform: rotate(180deg);
+        transition: all linear 0.3s;
+    }
+}
+
+.navbar-title {
+    display: flex;
+    align-items: center;
+
+    height: 40px;
+    width: 100%;
+    color: var(--text-dark);
+    font-size: 1.4rem;
+    font-weight: 400;
+    padding-left: 10px;
+    border-radius: var(--radius-10);
+    text-transform: capitalize;
+    user-select: none;
+
+    &:hover {
+        font-weight: 600;
+        background-color: var(--active-bg);
+    }
+}
+
+.navbar-item {
+    display: none;
+    margin-left: 20px;
+    padding: 6px 0;
+}
+
+.navbar-icon {
+    width: 30px;
+    font-size: 2.2rem;
+    line-height: 2.2rem;
+}
+
+.icon-left {
+    margin-right: 10px;
+    display: flex;
+}
+
+.icon-right {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: unset;
+}
+
 // text
 .text {
     color: var(--text-dark-alpha);
