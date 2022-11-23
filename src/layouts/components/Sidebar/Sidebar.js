@@ -116,7 +116,7 @@ function Sidebar() {
 
                             <NavbarItem
                                 title={TV_COMING}
-                                link={`/coming/${TV_AIRING}`}
+                                link={`/coming/${TV_COMING}`}
                                 leftIcon={<BsDisplay />}
                             />
                         </div>

@@ -6,7 +6,10 @@ import images from '~/assets/image';
 import style from './ImageOriginal.module.scss';
 
 const ImageOriginal = forwardRef(
-    ({ path, alt, className, fallBack: customFallBack = images.noImage, ...props }, ref) => {
+    (
+        { path, alt, className, fallBack: customFallBack = images.noImageOriginal, ...props },
+        ref,
+    ) => {
         const [fallBack, setFallBack] = useState('');
 
         const handleError = () => {

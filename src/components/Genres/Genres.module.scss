@@ -1,0 +1,17 @@
+.wrapper {
+    display: flex;
+    padding-bottom: 10px;
+}
+
+.item {
+    font-size: 1.3rem;
+    font-weight: 700;
+    background-color: var(--dark-alpha-bg);
+    padding: 0 6px;
+    border: 1px solid var(--blue);
+    border-radius: 999px;
+}
+
+.item + .item {
+    margin-left: 10px;
+}

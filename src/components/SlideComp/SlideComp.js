@@ -5,7 +5,7 @@ import { BsPlayCircle } from 'react-icons/bs';
 
 import { Button } from '~/components/Button';
 import { ImageOriginal } from '~/components/ImageOriginal';
-import { MediaImages } from '~/components/MediaImages';
+import { Genres } from '~/components/Genres';
 import style from './SlideComp.module.scss';
 
 const cx = classNames.bind(style);
@@ -26,18 +26,9 @@ function SlideComp({ listItem, count }) {
                         alt={item.original_title || item.original_name}
                     />
 
-                    {item.media_type && (
-                        <div className={cx('display')}>
-                            <MediaImages
-                                className={cx('display-img')}
-                                type={item.media_type}
-                                id={item.id}
-                            />
-                        </div>
-                    )}
-
                     <div className={cx('info')}>
                         <h1 className={cx('title')}>{item.original_title || item.original_name}</h1>
+                        <Genres ids={item.genre_ids} type={item.media_type} />
                         <div className={cx('info__inner')}>
                             <h4 className={cx('subtitle')}>{item.media_type}</h4>
                             <h4 className={cx('subtitle')}>{`${item.vote_average.toFixed(
@@ -45,17 +36,19 @@ function SlideComp({ listItem, count }) {
                             )}/10`}</h4>
                         </div>
                         <p className={cx('desc')}>{item.overview}</p>
-                        <Button to={`${item.media_type}/${item.id}`} primary large>
-                            Learn More
-                        </Button>
-                        <Button
-                            to={`${item.media_type}/${item.id}`}
-                            outline
-                            large
-                            leftIcon={<BsPlayCircle />}
-                        >
-                            Play Trailer
-                        </Button>
+                        <div className={cx('btn')}>
+                            <Button to={`${item.media_type}/${item.id}`} primary large>
+                                Learn More
+                            </Button>
+                            <Button
+                                to={`${item.media_type}/${item.id}`}
+                                outline
+                                large
+                                leftIcon={<BsPlayCircle />}
+                            >
+                                Play Trailer
+                            </Button>
+                        </div>
                     </div>
                 </li>
             ))}

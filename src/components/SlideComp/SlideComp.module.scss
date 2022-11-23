@@ -38,6 +38,7 @@
 
     width: 40%;
     padding: 10px;
+    color: var(--white);
     border-radius: var(--radius-6);
     &:hover {
         background-color: #9999;
@@ -45,7 +46,6 @@
 }
 
 .title {
-    color: var(--white);
     font-size: 4rem;
     line-height: 4.4rem;
 }
@@ -55,7 +55,6 @@
 }
 
 .subtitle {
-    color: var(--white);
     text-transform: capitalize;
 
     + .subtitle {
@@ -64,7 +63,6 @@
 }
 
 .desc {
-    color: var(--text-dark);
     font-size: 1.6rem;
     font-weight: 1.8rem;
     margin-bottom: 10px;
@@ -74,4 +72,9 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
 }

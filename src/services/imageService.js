@@ -9,7 +9,7 @@ const imageService = async (type, id) => {
             include_image_language: 'en',
         },
     });
-    return res.backdrops;
+    return res?.backdrops;
 };
 
 export default imageService;

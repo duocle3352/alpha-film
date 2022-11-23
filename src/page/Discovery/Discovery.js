@@ -7,12 +7,12 @@ import { Pagination } from '~/components/Pagination';
 import { moviesInTheatresService, tvAiringTodayService, tvOnTheAirService } from '~/services';
 import { MV_THEATRES, TV_ON_THE_AIR, TV_AIRING } from '~/constans';
 import style from './Discovery.module.scss';
+import { AlphaTitle } from '~/components/AlphaTitle';
 
 const cx = classNames.bind(style);
 
 function Discovery() {
     const params = useParams();
-    const [currentPage, setCurrentPage] = useState(1);
     const [movieNowPlayingTotalPage, setMovieNowPlayingTotalPage] = useState(0);
     const [tvAiringTodayTotalPage, setTvAiringTodayTotalPage] = useState(0);
     const [tvOnTheAirTotalPage, setTvOnTheAirTotalPage] = useState(0);
@@ -35,81 +35,82 @@ function Discovery() {
     }
 
     useEffect(() => {
-        if (params.page) {
-            setCurrentPage(Number(params.page));
-        } else {
-            setCurrentPage(1);
-        }
-    }, [params.page]);
-
-    useEffect(() => {
         const fetchApi = async () => {
-            const res = await moviesInTheatresService(currentPage);
+            const res = await moviesInTheatresService(params.page);
 
             setMovieNowPlaying(res.results);
             setMovieNowPlayingTotalPage(res.total_pages);
         };
 
         fetchApi();
-    }, [currentPage]);
+    }, [params.page]);
 
     useEffect(() => {
         const fetchApi = async () => {
-            const res = await tvAiringTodayService(currentPage);
+            const res = await tvAiringTodayService(params.page);
 
             setTvAiringToday(res.results);
             setTvAiringTodayTotalPage(res.total_pages);
         };
 
         fetchApi();
-    }, [currentPage]);
+    }, [params.page]);
 
     useEffect(() => {
         const fetchApi = async () => {
-            const res = await tvOnTheAirService(currentPage);
+            const res = await tvOnTheAirService(params.page);
 
             setTvOnTheAir(res.results);
             setTvOnTheAirTotalPage(res.total_pages);
         };
 
         fetchApi();
-    }, [currentPage]);
+    }, [params.page]);
 
     return (
         <section>
             {params.type === MV_THEATRES && (
-                <ul className={cx('row', 'sm-gutter')}>
-                    {movieNowPlaying.map((item) => (
-                        <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'c-3')}>
-                            <Card item={item} type="movie" />
-                        </li>
-                    ))}
-                </ul>
+                <>
+                    <AlphaTitle title={MV_THEATRES} />
+                    <ul className={cx('row', 'sm-gutter')}>
+                        {movieNowPlaying.map((item) => (
+                            <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'c-3')}>
+                                <Card item={item} type="movie" />
+                            </li>
+                        ))}
+                    </ul>
+                </>
             )}
 
             {params.type === TV_AIRING && (
-                <ul className={cx('row', 'sm-gutter')}>
-                    {tvAiringToday.map((item) => (
-                        <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'c-3')}>
-                            <Card item={item} type="tv" />
-                        </li>
-                    ))}
-                </ul>
+                <>
+                    <AlphaTitle title={TV_AIRING} />
+                    <ul className={cx('row', 'sm-gutter')}>
+                        {tvAiringToday.map((item) => (
+                            <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'c-3')}>
+                                <Card item={item} type="tv" />
+                            </li>
+                        ))}
+                    </ul>
+                </>
             )}
 
             {params.type === TV_ON_THE_AIR && (
-                <ul className={cx('row', 'sm-gutter')}>
-                    {tvOnTheAir.map((item) => (
-                        <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'c-3')}>
-                            <Card item={item} type="tv" />
-                        </li>
-                    ))}
-                </ul>
+                <>
+                    <AlphaTitle title={TV_ON_THE_AIR} />
+                    <ul className={cx('row', 'sm-gutter')}>
+                        {tvOnTheAir.map((item) => (
+                            <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'c-3')}>
+                                <Card item={item} type="tv" />
+                            </li>
+                        ))}
+                    </ul>
+                </>
             )}
 
             <Pagination
                 totalPageCount={totalPage}
-                currentPage={currentPage}
+                currentPage={Number(params.page) || 1}
                 siblingCount={2}
                 page={pageParam}
             />

@@ -19,7 +19,7 @@ function NavbarItem({ title, link, leftIcon, onHide }) {
             {/* main */}
             <div className={cx('content')}>
                 <span className={cx('left-icon')}>{leftIcon}</span>
-                {title}
+                {title.replace(/-/g, ' ')}
             </div>
         </NavLink>
     );
