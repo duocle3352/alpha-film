@@ -1,0 +1,282 @@
+.content {
+    width: 100%;
+    margin-top: 30px;
+}
+
+.content.content-have-control {
+    position: relative;
+    overflow: hidden;
+}
+
+.original_header {
+    display: flex;
+    align-items: center;
+
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.backdrop {
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    filter: brightness(0.3);
+    z-index: -1;
+}
+
+.poster-box {
+    padding: 0 30px;
+}
+
+.poster {
+    width: 100%;
+    margin: 70px 0;
+    border-radius: 10px;
+}
+
+.info {
+    color: var(--white);
+}
+
+.subtitle {
+    margin-bottom: 20px;
+}
+
+.type {
+    text-transform: uppercase;
+    border: 1px solid var(--blue);
+    border-radius: 6px;
+    padding: 0 8px;
+}
+
+.type,
+.rate,
+.release-date {
+    margin-right: 20px;
+}
+
+.rate {
+    display: inline-flex;
+    align-items: center;
+}
+
+.genre + .genre {
+    position: relative;
+    margin-left: 10px;
+
+    &::after {
+        content: ',';
+        position: absolute;
+        left: -10px;
+        bottom: 0;
+    }
+}
+
+.description,
+.action {
+    margin-bottom: 10px;
+}
+
+.creator {
+    display: flex;
+    margin-bottom: 30px;
+
+    li + li {
+        margin-left: 40px;
+    }
+
+    span {
+        font-size: 1.3rem;
+    }
+}
+
+.tagLine {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    color: var(--white);
+    font-family: var(--font-source-sans);
+    font-size: 2rem;
+    text-align: center;
+}
+
+// media
+
+.media-quantity {
+    color: var(--text-dark-alpha);
+    margin-left: 6px;
+}
+
+.media-list-cart {
+    flex-wrap: nowrap !important;
+    overflow-x: scroll;
+}
+
+.media-cart {
+    display: flex;
+    flex-direction: column;
+
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
+}
+
+.cart-image {
+    width: 100%;
+}
+
+.cart-info {
+    padding: 10px 8px;
+}
+
+.cart-title {
+    margin-bottom: 6px;
+    flex: 1;
+}
+
+.cart-subtitle {
+    font-size: 1.4rem;
+    color: var(--text-dark-alpha);
+}
+
+// season
+.current-season {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+}
+
+.current-season-img {
+    width: 150px;
+}
+
+.current-season-info {
+    margin-left: 30px;
+
+    p {
+        margin-top: 30px;
+    }
+}
+
+// review
+.list-review {
+    max-height: 300px;
+    overflow: auto;
+}
+
+.review-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.author-avatar {
+    width: 70px;
+    min-width: 70px;
+    object-fit: contain;
+}
+
+.review-info {
+    color: var(--text-dark);
+    margin-left: 10px;
+}
+
+.review-title {
+    display: flex;
+    align-items: center;
+}
+
+.review-rate {
+    display: inline-flex;
+    align-items: center;
+
+    color: var(--white);
+    background-color: #000;
+    font-size: 1.4rem;
+    padding: 0px 6px;
+    margin-left: 20px;
+    border-radius: 8px;
+}
+
+.review-subtitle {
+    font-size: 1.4rem;
+    line-height: 1.4rem;
+    color: var(--text-dark-alpha);
+    margin-bottom: 20px;
+}
+
+// facts
+.facts-list-item {
+    padding: 10px 20px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+}
+
+.facts-item {
+    padding: 6px 0;
+
+    + .facts-item {
+        border-top: 1px dashed var(--border);
+    }
+}
+
+.facts-item__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.facts-item.facts-item__inline {
+    display: flex;
+    justify-content: space-between;
+}
+
+.facts-dsc {
+    text-transform: capitalize;
+}
+
+.facts-logo-item {
+    width: 100px;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
+.facts-logo {
+    width: 100%;
+}
+
+.facts-list-key,
+.facts-list-logo {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.facts-key-item {
+    text-transform: capitalize;
+    background-color: #9999;
+    padding: 0 4px;
+    margin-top: 4px;
+    margin-right: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+// Recommendations
+.recommend-list-item {
+    transition: all linear 0.3s;
+}
+
+.recommend-cart-item {
+    margin-bottom: 20px;
+}

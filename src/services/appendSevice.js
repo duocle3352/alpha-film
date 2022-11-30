@@ -1,10 +1,14 @@
 import * as httpRequest from '~/utils/httpRequest';
 
-const appendService = async () => {
-    const res = await httpRequest.get();
+const appendService = async (type, id) => {
+    const res = await httpRequest.get(`${type}/${id}`, {
+        params: {
+            api_key: '422c277f59a1913e0290741efbfa04e8',
+            append_to_response: 'videos,images,credits,reviews,keywords,recommendations',
+        },
+    });
 
-    console.log(res);
-    // return res
+    return res;
 };
 
 export default appendService;

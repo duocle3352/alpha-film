@@ -1,30 +1,16 @@
 import PropTypes from 'prop-types';
-import { useState, forwardRef } from 'react';
+import { forwardRef } from 'react';
 import classNames from 'classnames/bind';
 
 import images from '~/assets/image';
 import style from './Image.module.scss';
 
-const Image = forwardRef(
-    ({ path, alt, className, fallBack: customFallBack = images.noImage, ...props }, ref) => {
-        const [fallBack, setFallBack] = useState('');
+const Image = forwardRef(({ path, alt, className, fallBack = images.noImage, ...props }, ref) => {
+    let link = `https://image.tmdb.org/t/p/w300_and_h450_face${path}`;
+    if (!path) link = fallBack;
 
-        const handleError = () => {
-            setFallBack(customFallBack);
-        };
-
-        return (
-            <img
-                className={classNames(style.wrapper, className)}
-                src={fallBack || `https://image.tmdb.org/t/p/w220_and_h330_face${path}`}
-                alt={alt}
-                ref={ref}
-                {...props}
-                onError={handleError}
-            />
-        );
-    },
-);
+    return <img className={classNames(style.wrapper, className)} src={link} alt={alt} ref={ref} {...props} />;
+});
 
 Image.propTypes = {
     path: PropTypes.string,

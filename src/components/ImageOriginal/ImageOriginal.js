@@ -1,34 +1,25 @@
 import PropTypes from 'prop-types';
-import { useState, forwardRef } from 'react';
+import { forwardRef } from 'react';
 import classNames from 'classnames/bind';
 
 import images from '~/assets/image';
 import style from './ImageOriginal.module.scss';
 
-const ImageOriginal = forwardRef(
-    (
-        { path, alt, className, fallBack: customFallBack = images.noImageOriginal, ...props },
-        ref,
-    ) => {
-        const [fallBack, setFallBack] = useState('');
+const ImageOriginal = forwardRef(({ path, alt, className, fallBack = images.noImageOriginal, ...props }, ref) => {
+    let link = `https://image.tmdb.org/t/p/original/${path}`;
+    if (!path) link = fallBack;
 
-        const handleError = () => {
-            setFallBack(customFallBack);
-        };
-
-        return (
-            <img
-                // https://image.tmdb.org/t/p/original/cs3LpA38BS2XDPfUzdgMB537XOo.jpg
-                className={classNames(style.wrapper, className)}
-                src={fallBack || `https://image.tmdb.org/t/p/original/${path}`}
-                alt={alt}
-                ref={ref}
-                {...props}
-                onError={handleError}
-            />
-        );
-    },
-);
+    return (
+        <img
+            // https://image.tmdb.org/t/p/original/cs3LpA38BS2XDPfUzdgMB537XOo.jpg
+            className={classNames(style.wrapper, className)}
+            src={link}
+            alt={alt}
+            ref={ref}
+            {...props}
+        />
+    );
+});
 
 ImageOriginal.propTypes = {
     path: PropTypes.string,
