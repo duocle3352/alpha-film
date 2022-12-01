@@ -7,7 +7,6 @@ import {
     AiOutlineHome,
     AiOutlineFieldTime,
     AiOutlineCompass,
-    AiOutlineStar,
     AiOutlineDownload,
     AiOutlineSetting,
 } from 'react-icons/ai';
@@ -126,7 +125,7 @@ function Sidebar() {
                 <Navbar separate onHide={handleHide}>
                     <NavbarItem
                         title="Recent"
-                        link={config.routes.home}
+                        link={config.routes.recent}
                         leftIcon={<BiTimeFive />}
                     />
                     <NavbarItem
@@ -134,12 +133,6 @@ function Sidebar() {
                         link={config.routes.home}
                         leftIcon={<BiBookBookmark />}
                     />
-                    <NavbarItem
-                        title="Top rated"
-                        link={config.routes.home}
-                        leftIcon={<AiOutlineStar />}
-                    />
-
                     <NavbarItem
                         title="Downloaded"
                         link={config.routes.home}

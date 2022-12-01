@@ -137,7 +137,7 @@ function Home() {
                 className={cx('wrapper')}
                 style={{ backgroundImage: `url(${images.popularBg})` }}
             >
-                <AlphaTitle title="What's Popular" link="./">
+                <AlphaTitle title="What's Popular">
                     <Selector
                         optionI="In Theaters"
                         optionII="On TV"
@@ -232,7 +232,7 @@ function Home() {
 
             {/* top rate */}
             <section className={cx('wrapper')}>
-                <AlphaTitle title="top rate" link="./">
+                <AlphaTitle title="top rate">
                     <Selector
                         optionI="In Theaters"
                         optionII="On TV"

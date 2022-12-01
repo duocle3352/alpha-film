@@ -2,7 +2,9 @@ import classNames from 'classnames/bind';
 import { useEffect, useRef, useState } from 'react';
 import { FaHeart, FaPlay, FaStar } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
+import { addRecent } from '~/features/recentSlice';
 import { AlphaTitle } from '~/components/AlphaTitle';
 import { Button } from '~/components/Button';
 import { Card } from '~/components/Card';
@@ -15,6 +17,7 @@ import style from './Detail.module.scss';
 const cx = classNames.bind(style);
 
 function Detail() {
+    const dispatch = useDispatch();
     const params = useParams();
     const id = params?.id;
     const type = params?.type;
@@ -46,9 +49,20 @@ function Detail() {
         const fetchApi = async () => {
             const results = await appendService(type, id);
             setData(results);
+
+            const recentItem = {
+                id,
+                type,
+                name: results.name || results.original_title,
+                poster_path: results.poster_path,
+                release_date: results.first_air_date || results.release_date,
+            };
+
+            dispatch(addRecent(recentItem));
         };
 
         fetchApi();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [type, id]);
 
     const handleSetMediaType = (type) => {
@@ -129,15 +143,27 @@ function Detail() {
             {/* media */}
             <section className={cx('content')}>
                 <AlphaTitle title="Media">
-                    <Button primary={isVideos} text={!isVideos} onClick={() => handleSetMediaType('videos')}>
+                    <Button
+                        primary={isVideos}
+                        text={!isVideos}
+                        onClick={() => handleSetMediaType('videos')}
+                    >
                         Videos
                         <span className={cx('media-quantity')}>{lisVideo.length}</span>
                     </Button>
-                    <Button primary={isBackdrops} text={!isBackdrops} onClick={() => handleSetMediaType('backdrops')}>
+                    <Button
+                        primary={isBackdrops}
+                        text={!isBackdrops}
+                        onClick={() => handleSetMediaType('backdrops')}
+                    >
                         BackDrops
                         <span className={cx('media-quantity')}>{listBackdrop.length}</span>
                     </Button>
-                    <Button primary={isPosters} text={!isPosters} onClick={() => handleSetMediaType('posters')}>
+                    <Button
+                        primary={isPosters}
+                        text={!isPosters}
+                        onClick={() => handleSetMediaType('posters')}
+                    >
                         Posters
                         <span className={cx('media-quantity')}>{listPoster.length}</span>
                     </Button>
@@ -175,7 +201,11 @@ function Detail() {
                         listPoster.map((backdrop, index) => (
                             <li key={index} className="col l-2">
                                 <div className={cx('media-cart')}>
-                                    <Image path={backdrop.file_path} alt="backdrop" className={cx('media-image')} />
+                                    <Image
+                                        path={backdrop.file_path}
+                                        alt="backdrop"
+                                        className={cx('media-image')}
+                                    />
                                 </div>
                             </li>
                         ))}
@@ -190,11 +220,17 @@ function Detail() {
                         data.credits.cast.map((cast) => (
                             <li key={cast.id} className="col l-2">
                                 <div className={cx('media-cart')}>
-                                    <Image path={cast.profile_path} alt={cast.name} className={cx('cart-image')} />
+                                    <Image
+                                        path={cast.profile_path}
+                                        alt={cast.name}
+                                        className={cx('cart-image')}
+                                    />
                                     <div className={cx('cart-info')}>
                                         <h4 className={cx('cart-title')}>{cast.name}</h4>
                                         <p className={cx('cart-subtitle')}>{cast.character}</p>
-                                        <p className={cx('cart-subtitle')}>{cast.known_for_department}</p>
+                                        <p className={cx('cart-subtitle')}>
+                                            {cast.known_for_department}
+                                        </p>
                                     </div>
                                 </div>
                             </li>
@@ -213,7 +249,11 @@ function Detail() {
                         >
                             Current Season
                         </Button>
-                        <Button primary={isFullSeason} text={!isFullSeason} onClick={() => handleSetSeasonType('full')}>
+                        <Button
+                            primary={isFullSeason}
+                            text={!isFullSeason}
+                            onClick={() => handleSetSeasonType('full')}
+                        >
                             Full Season
                         </Button>
                     </AlphaTitle>
@@ -223,7 +263,9 @@ function Detail() {
                             <Image path={poster} alt={name} className={cx('current-season-img')} />
                             <div className={cx('current-season-info')}>
                                 <h3>{`Season ${currentSeason}`}</h3>
-                                <h4>{`${releaseDate.slice(0, 4)} | ${data.number_of_episodes} Episodes`}</h4>
+                                <h4>{`${releaseDate.slice(0, 4)} | ${
+                                    data.number_of_episodes
+                                } Episodes`}</h4>
 
                                 <p>{`Season ${currentSeason} of ${
                                     data.name || data.original_title
@@ -244,7 +286,9 @@ function Detail() {
                                         />
                                         <div className={cx('cart-info')}>
                                             <h3 className={cx('cart-title')}>{season.name}</h3>
-                                            <p className={cx('cart-subtitle')}>{`${season.episode_count} Episodes`}</p>
+                                            <p
+                                                className={cx('cart-subtitle')}
+                                            >{`${season.episode_count} Episodes`}</p>
                                             <p className={cx('cart-subtitle')}>{season.air_date}</p>
                                         </div>
                                     </div>
@@ -261,18 +305,25 @@ function Detail() {
                 <ul className={cx('list-review')}>
                     {listReview.map((review) => (
                         <li key={review.id} className={cx('review-item')}>
-                            <ImageOriginal path={review.author_details.avatar_path} className={cx('author-avatar')} />
+                            <ImageOriginal
+                                path={review.author_details.avatar_path}
+                                className={cx('author-avatar')}
+                            />
 
                             <div className={cx('review-info')}>
                                 <h4 className={cx('review-title')}>
                                     {`A review by ${review.author}`}
                                     <span className={cx('review-rate')}>
-                                        {review.author_details.rating && review.author_details.rating.toFixed(1)}
+                                        {review.author_details.rating &&
+                                            review.author_details.rating.toFixed(1)}
                                         <FaStar />
                                     </span>
                                 </h4>
                                 <p className={cx('review-subtitle')}>
-                                    {`Written by ${review.author} on ${review.created_at.slice(0, 10)}`}
+                                    {`Written by ${review.author} on ${review.created_at.slice(
+                                        0,
+                                        10,
+                                    )}`}
                                 </p>
                                 <p>{review.content}</p>
                             </div>
@@ -306,7 +357,10 @@ function Detail() {
                             <div className={cx('facts-item__inner')}>
                                 <h4>Budget</h4>
                                 <p className={cx('facts-dsc')}>
-                                    {data.budget.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+                                    {data.budget.toLocaleString('en-US', {
+                                        style: 'currency',
+                                        currency: 'USD',
+                                    })}
                                 </p>
                             </div>
                         )}
@@ -314,7 +368,10 @@ function Detail() {
                             <div className={cx('facts-item__inner')}>
                                 <h4>Revenue</h4>
                                 <p className={cx('facts-dsc')}>
-                                    {data.revenue.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+                                    {data.revenue.toLocaleString('en-US', {
+                                        style: 'currency',
+                                        currency: 'USD',
+                                    })}
                                 </p>
                             </div>
                         )}

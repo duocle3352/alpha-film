@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
-
 import { FaPlay } from 'react-icons/fa';
 import { BsFillBookmarkHeartFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
@@ -13,7 +12,11 @@ function Card({ item, type }) {
     return (
         <div className={cx('wrapper')}>
             <Link to={`/${item.media_type || type}/${item.id}`} className={cx('inner')}>
-                <Image className={cx('img')} path={item.poster_path} alt={item.original_title || item.name} />
+                <Image
+                    className={cx('img')}
+                    path={item.poster_path}
+                    alt={item.original_title || item.name}
+                />
                 <span className={cx('play-icon')}>
                     <FaPlay />
                 </span>
