@@ -130,7 +130,7 @@ function Sidebar() {
                     />
                     <NavbarItem
                         title="Bookmarked"
-                        link={config.routes.home}
+                        link={config.routes.bookmark}
                         leftIcon={<BiBookBookmark />}
                     />
                     <NavbarItem

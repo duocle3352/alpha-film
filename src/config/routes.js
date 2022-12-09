@@ -5,6 +5,7 @@ const routes = {
     coming: '/coming/:type',
     comingPage: '/coming/:type/:page',
     recent: '/recent',
+    bookmark: '/bookmark',
     search: '/search',
     library: '/library',
     seen: '/seen',

@@ -3,6 +3,29 @@
     position: relative;
 }
 
+.bookmark-btn {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    font-size: 2rem;
+    color: var(--white);
+    padding-top: 4px;
+    box-shadow: 0 2px 8px rgb(0 0 0);
+    z-index: 1;
+
+    &:hover {
+        color: var(--blue);
+    }
+}
+
+.bookmark-btn.active {
+    color: var(--blue);
+
+    &:hover {
+        color: var(--white);
+    }
+}
+
 .inner {
     position: relative;
 
@@ -35,20 +58,6 @@
     font-size: 3rem;
 
     transition: all linear 0.2s;
-}
-
-.heart-icon {
-    position: absolute;
-    top: 4px;
-    right: 4px;
-    font-size: 2rem;
-    color: var(--white);
-    padding-top: 4px;
-    box-shadow: 0 2px 8px rgb(0 0 0);
-
-    &:hover {
-        color: var(--blue);
-    }
 }
 
 .title {

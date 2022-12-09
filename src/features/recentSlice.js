@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { LIST_RECENT } from '~/constans';
 
 const recentSlice = createSlice({
     name: 'recent',
-    initialState: JSON.parse(localStorage.getItem('list-recent')) || [],
+    initialState: JSON.parse(localStorage.getItem(LIST_RECENT)) || [],
     reducers: {
         addRecent(state, action) {
             const isHad = state.some(
-                (element) =>
-                    element.id === action.payload.id && element.type === action.payload.type,
+                (element) => element.id === action.payload.id && element.type === action.payload.type,
             );
             if (isHad) {
                 return;
@@ -18,7 +18,7 @@ const recentSlice = createSlice({
                 } else {
                     state.unshift(action.payload);
                 }
-                localStorage.setItem('list-recent', JSON.stringify(state));
+                localStorage.setItem(LIST_RECENT, JSON.stringify(state));
             }
         },
     },

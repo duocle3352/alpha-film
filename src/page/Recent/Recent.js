@@ -1,13 +1,13 @@
 import classNames from 'classnames/bind';
 import { AlphaTitle } from '~/components/AlphaTitle';
 import { Card } from '~/components/Card';
-
+import { LIST_RECENT } from '~/constans';
 import style from './Recent.module.scss';
 
 const cx = classNames.bind(style);
 
 function Recent() {
-    const recentList = JSON.parse(localStorage.getItem('list-recent'));
+    const recentList = JSON.parse(localStorage.getItem(LIST_RECENT));
 
     return (
         <section className={cx('wrapper')}>

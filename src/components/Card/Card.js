@@ -1,29 +1,53 @@
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
+import { useState } from 'react';
 import { FaPlay } from 'react-icons/fa';
-import { BsFillBookmarkHeartFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+import { BsFillBookmarkDashFill, BsFillBookmarkPlusFill } from 'react-icons/bs';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { addBookmark, removeBookmark } from '~/features/bookmarkSlice';
 import { Image } from '../Image';
 import style from './Card.module.scss';
 
 const cx = classNames.bind(style);
 
 function Card({ item, type }) {
+    const dispatch = useDispatch();
+    const bookmarkList = useSelector((state) => state.bookmark);
+    // eslint-disable-next-line eqeqeq
+    const bookmarked = bookmarkList.some((bookmark) => bookmark.item.id == item.id);
+    const [isBookmarked, setIsBookmarked] = useState(bookmarked);
+
+    const handleAddToBookmark = () => {
+        const payload = { item, type: type || item.media_type };
+        dispatch(addBookmark(payload));
+        setIsBookmarked(true);
+    };
+
+    const handleMoveOutBookmark = () => {
+        dispatch(removeBookmark(item.id));
+        setIsBookmarked(false);
+    };
+
     return (
         <div className={cx('wrapper')}>
+            {isBookmarked ? (
+                <button className={cx('bookmark-btn', { active: isBookmarked })} onClick={handleMoveOutBookmark}>
+                    <BsFillBookmarkDashFill />
+                </button>
+            ) : (
+                <button className={cx('bookmark-btn')} onClick={handleAddToBookmark}>
+                    <BsFillBookmarkPlusFill />
+                </button>
+            )}
+
             <Link to={`/${item.media_type || type}/${item.id}`} className={cx('inner')}>
-                <Image
-                    className={cx('img')}
-                    path={item.poster_path}
-                    alt={item.original_title || item.name}
-                />
+                <Image className={cx('img')} path={item.poster_path} alt={item.original_title || item.name} />
                 <span className={cx('play-icon')}>
                     <FaPlay />
                 </span>
             </Link>
-            <button className={cx('heart-icon')}>
-                <BsFillBookmarkHeartFill />
-            </button>
 
             <div className={cx('title')}>
                 <Link to={`/${item.media_type || type}/${item.id}`} className={cx('name')}>
