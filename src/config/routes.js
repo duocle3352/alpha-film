@@ -6,12 +6,10 @@ const routes = {
     comingPage: '/coming/:type/:page',
     recent: '/recent',
     bookmark: '/bookmark',
-    search: '/search',
-    library: '/library',
-    seen: '/seen',
-    like: '/like',
-    profile: '/profile',
     setting: '/setting',
+    help: '/help',
+    download: '/download',
+    search: '/search',
     detail: '/:type/:id',
 };
 

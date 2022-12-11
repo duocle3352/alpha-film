@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addBookmark, removeBookmark } from '~/features/bookmarkSlice';
 import { Image } from '../Image';
 import style from './Card.module.scss';
+import { toast } from 'react-toastify';
 
 const cx = classNames.bind(style);
 
@@ -19,15 +20,29 @@ function Card({ item, type }) {
     const bookmarked = bookmarkList.some((bookmark) => bookmark.item.id == item.id);
     const [isBookmarked, setIsBookmarked] = useState(bookmarked);
 
+    const toastMassage = (massage) =>
+        toast.success(massage, {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'dark',
+        });
+
     const handleAddToBookmark = () => {
         const payload = { item, type: type || item.media_type };
         dispatch(addBookmark(payload));
         setIsBookmarked(true);
+        toastMassage('Đã thêm vào bookmark');
     };
 
     const handleMoveOutBookmark = () => {
         dispatch(removeBookmark(item.id));
         setIsBookmarked(false);
+        toastMassage('Đã xóa khỏi bookmark');
     };
 
     return (

@@ -7,7 +7,9 @@ import { Detail } from '~/page/Detail';
 import { Recent } from '~/page/Recent';
 import { Bookmark } from '~/page/Bookmark';
 import { Search } from '~/page/Search';
-import { Profile } from '~/page/Profile';
+import { Setting } from '~/page/Setting';
+import { Download } from '~/page/Download';
+import { Help } from '~/page/Help';
 
 const publicRoutes = [
     { path: config.routes.home, component: Home },
@@ -19,7 +21,9 @@ const publicRoutes = [
     { path: config.routes.bookmark, component: Bookmark },
     { path: config.routes.search, component: Search },
     { path: config.routes.detail, component: Detail },
-    { path: config.routes.profile, component: Profile, layout: null },
+    { path: config.routes.setting, component: Setting },
+    { path: config.routes.download, component: Download },
+    { path: config.routes.help, component: Help },
 ];
 
 const privateRoutes = [];

@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { FaPlay, FaStar } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import { addRecent } from '~/features/recentSlice';
 import { AlphaTitle } from '~/components/AlphaTitle';
@@ -91,6 +92,18 @@ function Detail() {
         }
     };
 
+    const notify = () =>
+        toast.warn('Chức năng chưa hoàn thiện, vui lòng quay lại sau!', {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'dark',
+        });
+
     return (
         <section className="row">
             {/* header */}
@@ -116,10 +129,10 @@ function Detail() {
                             ))}
                     </div>
                     <div className={cx('action')}>
-                        <Button primary small leftIcon={<FaPlay />}>
+                        <Button primary small leftIcon={<FaPlay />} onClick={notify}>
                             Play Now
                         </Button>
-                        <Button outline small leftIcon={<FaPlay />}>
+                        <Button outline small leftIcon={<FaPlay />} onClick={notify}>
                             Play Trailer
                         </Button>
                     </div>

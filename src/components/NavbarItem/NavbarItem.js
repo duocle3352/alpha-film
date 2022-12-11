@@ -6,12 +6,12 @@ import style from './NavbarItem.module.scss';
 
 const cx = classNames.bind(style);
 
-function NavbarItem({ title, link, leftIcon, onHide }) {
+function NavbarItem({ title, to, leftIcon, onHide }) {
     const params = useParams();
 
     return (
         <NavLink
-            to={link}
+            to={to}
             end
             className={(nav) => cx('wrapper', { active: nav.isActive || params.type === title })}
             onClick={onHide}
@@ -27,7 +27,7 @@ function NavbarItem({ title, link, leftIcon, onHide }) {
 
 NavbarItem.propTypes = {
     title: PropTypes.string.isRequired,
-    link: PropTypes.string.isRequired,
+    to: PropTypes.string,
     leftIcon: PropTypes.node,
     onHide: PropTypes.func,
 };

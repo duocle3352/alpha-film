@@ -1,4 +1,5 @@
 import classNames from 'classnames/bind';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BiBookBookmark, BiHelpCircle, BiMovie, BiTimeFive } from 'react-icons/bi';
 import { FiChevronDown } from 'react-icons/fi';
@@ -17,7 +18,6 @@ import { Navbar } from '~/components/Navbar';
 import { NavbarItem } from '~/components/NavbarItem';
 import { MV_THEATRES, TV_AIRING, TV_ON_THE_AIR, MV_COMING, TV_COMING } from '~/constans';
 import style from './Sidebar.module.scss';
-import { useState } from 'react';
 
 const cx = classNames.bind(style);
 
@@ -52,12 +52,7 @@ function Sidebar() {
             {/* navbar */}
             <nav className={cx('navbar')}>
                 <Navbar separate>
-                    <NavbarItem
-                        title="Home"
-                        link={config.routes.home}
-                        leftIcon={<AiOutlineHome />}
-                        onHide={handleHide}
-                    />
+                    <NavbarItem title="Home" to={config.routes.home} leftIcon={<AiOutlineHome />} onHide={handleHide} />
 
                     <div
                         className={cx('navbar-children', { show: isDiscovery })}
@@ -73,30 +68,19 @@ function Sidebar() {
                             Discovery
                         </h3>
                         <div className={cx('navbar-item')}>
-                            <NavbarItem
-                                title={MV_THEATRES}
-                                link={`/discovery/${MV_THEATRES}`}
-                                leftIcon={<BiMovie />}
-                            />
+                            <NavbarItem title={MV_THEATRES} to={`/discovery/${MV_THEATRES}`} leftIcon={<BiMovie />} />
 
-                            <NavbarItem
-                                title={TV_AIRING}
-                                link={`/discovery/${TV_AIRING}`}
-                                leftIcon={<BsDisplay />}
-                            />
+                            <NavbarItem title={TV_AIRING} to={`/discovery/${TV_AIRING}`} leftIcon={<BsDisplay />} />
 
                             <NavbarItem
                                 title={TV_ON_THE_AIR}
-                                link={`/discovery/${TV_ON_THE_AIR}`}
+                                to={`/discovery/${TV_ON_THE_AIR}`}
                                 leftIcon={<BsDisplay />}
                             />
                         </div>
                     </div>
 
-                    <div
-                        className={cx('navbar-children', { show: isComingSoon })}
-                        onClick={() => handleShow('coming')}
-                    >
+                    <div className={cx('navbar-children', { show: isComingSoon })} onClick={() => handleShow('coming')}>
                         <span className={cx('navbar-icon', 'icon-right')}>
                             <FiChevronDown />
                         </span>
@@ -107,51 +91,22 @@ function Sidebar() {
                             Coming soon
                         </h3>
                         <div className={cx('navbar-item')}>
-                            <NavbarItem
-                                title={MV_COMING}
-                                link={`/coming/${MV_COMING}`}
-                                leftIcon={<BiMovie />}
-                            />
+                            <NavbarItem title={MV_COMING} to={`/coming/${MV_COMING}`} leftIcon={<BiMovie />} />
 
-                            <NavbarItem
-                                title={TV_COMING}
-                                link={`/coming/${TV_COMING}`}
-                                leftIcon={<BsDisplay />}
-                            />
+                            <NavbarItem title={TV_COMING} to={`/coming/${TV_COMING}`} leftIcon={<BsDisplay />} />
                         </div>
                     </div>
                 </Navbar>
 
                 <Navbar separate onHide={handleHide}>
-                    <NavbarItem
-                        title="Recent"
-                        link={config.routes.recent}
-                        leftIcon={<BiTimeFive />}
-                    />
-                    <NavbarItem
-                        title="Bookmarked"
-                        link={config.routes.bookmark}
-                        leftIcon={<BiBookBookmark />}
-                    />
-                    <NavbarItem
-                        title="Downloaded"
-                        link={config.routes.home}
-                        leftIcon={<AiOutlineDownload />}
-                    />
+                    <NavbarItem title="Recent" to={config.routes.recent} leftIcon={<BiTimeFive />} />
+                    <NavbarItem title="Bookmarked" to={config.routes.bookmark} leftIcon={<BiBookBookmark />} />
+                    <NavbarItem title="Downloaded" to={config.routes.download} leftIcon={<AiOutlineDownload />} />
                 </Navbar>
 
                 <Navbar onHide={handleHide}>
-                    <NavbarItem
-                        title="Settings"
-                        link={config.routes.home}
-                        leftIcon={<AiOutlineSetting />}
-                    />
-
-                    <NavbarItem
-                        title="Help"
-                        link={config.routes.home}
-                        leftIcon={<BiHelpCircle />}
-                    />
+                    <NavbarItem title="Settings" to={config.routes.setting} leftIcon={<AiOutlineSetting />} />
+                    <NavbarItem title="Help" to={config.routes.help} leftIcon={<BiHelpCircle />} />
                 </Navbar>
             </nav>
             {/* make by */}
