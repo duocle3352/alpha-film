@@ -9,7 +9,8 @@ const routes = {
     setting: '/setting',
     help: '/help',
     download: '/download',
-    search: '/search',
+    search: '/search/:value',
+    searchPage: '/search/:value/:page',
     detail: '/:type/:id',
 };
 

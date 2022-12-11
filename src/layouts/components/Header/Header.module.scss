@@ -7,49 +7,7 @@
     right: 0;
     height: var(--header-hight);
     background-color: var(--white);
-    // box-shadow: 0px 4px 32px 0px rgb(0 0 0 / 10%);
-}
-
-// search place
-.search-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    position: relative;
-
-    height: 40px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-999);
-    padding: 4px 0px 4px 20px;
-    margin: 0 var(--header-margin);
-    overflow: hidden;
-
-    &:focus-within {
-        border-color: var(--border-active);
-    }
-}
-
-.input {
-    flex: 1;
-    color: var(--text-dark);
-    font-size: 1.6rem;
-    padding-right: 20px;
-
-    &:not(:placeholder-shown) ~ .btn {
-        color: var(--text-dark);
-    }
-}
-
-.btn {
-    display: flex;
-    align-items: center;
-    height: 40px;
-    font-size: 1.8rem;
-    color: var(--text-dark-alpha);
-    background-color: #f8f8f8;
-    padding: 0 14px;
-    border-left: 1px solid var(--separate);
+    z-index: 999;
 }
 
 // tool place

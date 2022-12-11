@@ -20,6 +20,7 @@ const publicRoutes = [
     { path: config.routes.recent, component: Recent },
     { path: config.routes.bookmark, component: Bookmark },
     { path: config.routes.search, component: Search },
+    { path: config.routes.searchPage, component: Search },
     { path: config.routes.detail, component: Detail },
     { path: config.routes.setting, component: Setting },
     { path: config.routes.download, component: Download },

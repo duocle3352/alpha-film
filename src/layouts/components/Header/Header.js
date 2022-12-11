@@ -1,13 +1,8 @@
 import classNames from 'classnames/bind';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { BsSearch, BsSun, BsMoonStars } from 'react-icons/bs';
+import { BsSun, BsMoonStars } from 'react-icons/bs';
 import { BiHelpCircle, BiCommentError } from 'react-icons/bi';
-import {
-    AiOutlineUser,
-    AiOutlineSetting,
-    AiOutlineLogout,
-} from 'react-icons/ai';
+import { AiOutlineUser, AiOutlineSetting, AiOutlineLogout } from 'react-icons/ai';
 import HeadlessTippy from '@tippyjs/react/headless';
 
 import config from '~/config';
@@ -15,18 +10,13 @@ import images from '~/assets/image';
 import { Navbar } from '~/components/Navbar';
 import { NavbarItem } from '~/components/NavbarItem';
 import style from './Header.module.scss';
+import { Search } from '~/components/Search';
 
 const cx = classNames.bind(style);
 
 function Header() {
-    const [searchValue, setSearchValue] = useState('');
     const [darkTheme, setDarkTheme] = useState(false);
     const [showUserMenu, setShowUserMenu] = useState(false);
-
-    const handleChangeValue = (e) => {
-        setSearchValue(e.target.value);
-    };
-
     const handleToggleTheme = () => {
         setDarkTheme(!darkTheme);
     };
@@ -34,19 +24,7 @@ function Header() {
     return (
         <header className={cx('wrapper', 'row')}>
             <div className="col l-9">
-                {/* search */}
-                <div className={cx('search-content')}>
-                    <input
-                        value={searchValue}
-                        placeholder="Tiềm kiếm..."
-                        className={cx('input')}
-                        onChange={(e) => handleChangeValue(e)}
-                    />
-
-                    <Link to={config.routes.search} className={cx('btn')}>
-                        <BsSearch />
-                    </Link>
-                </div>
+                <Search />
             </div>
             <div className="col l-3">
                 <div className={cx('tool-content')}>
@@ -63,20 +41,12 @@ function Header() {
                         placement="top-end"
                         onClickOutside={() => setShowUserMenu(false)}
                         render={(attrs) => (
-                            <div
-                                className={cx('user-menu')}
-                                tabIndex="-1"
-                                {...attrs}
-                            >
+                            <div className={cx('user-menu')} tabIndex="-1" {...attrs}>
                                 <Navbar separate>
-                                    <NavbarItem
-                                        title="Hồ sơ"
-                                        link={config.routes.profile}
-                                        leftIcon={<AiOutlineUser />}
-                                    />
+                                    <NavbarItem title="Hồ sơ" link={config.routes.home} leftIcon={<AiOutlineUser />} />
                                     <NavbarItem
                                         title="Cài đặt"
-                                        link={config.routes.setting}
+                                        link={config.routes.home}
                                         leftIcon={<AiOutlineSetting />}
                                     />
                                 </Navbar>
@@ -84,12 +54,12 @@ function Header() {
                                 <Navbar separate>
                                     <NavbarItem
                                         title="Trợ giúp"
-                                        link="./out"
+                                        link={config.routes.home}
                                         leftIcon={<BiHelpCircle />}
                                     />
                                     <NavbarItem
                                         title="Gửi phản hồi"
-                                        link="./out"
+                                        link={config.routes.home}
                                         leftIcon={<BiCommentError />}
                                     />
                                 </Navbar>
@@ -97,22 +67,15 @@ function Header() {
                                 <Navbar>
                                     <NavbarItem
                                         title="Đăng xuất"
-                                        link="./out"
+                                        link={config.routes.home}
                                         leftIcon={<AiOutlineLogout />}
                                     />
                                 </Navbar>
                             </div>
                         )}
                     >
-                        <button
-                            className={cx('user')}
-                            onClick={() => setShowUserMenu(true)}
-                        >
-                            <img
-                                src={images.avatar}
-                                alt="user name"
-                                className={cx('user-avatar')}
-                            />
+                        <button className={cx('user')} onClick={() => setShowUserMenu(true)}>
+                            <img src={images.avatar} alt="user name" className={cx('user-avatar')} />
                         </button>
                     </HeadlessTippy>
                 </div>
