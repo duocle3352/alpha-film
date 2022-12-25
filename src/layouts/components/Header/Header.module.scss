@@ -51,3 +51,127 @@
     border-radius: var(--radius-10);
     box-shadow: 0px 4px 32px 0px rgb(0 0 0 / 10%);
 }
+
+// sign in
+.sign-in_btn {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.sign-in_modal {
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgba(40, 40, 40, 0.774);
+}
+
+.sign-in_modal.active {
+    display: flex;
+}
+
+.modal-header {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.modal-header.active {
+    font-size: 2rem;
+    text-decoration: underline;
+}
+
+.modal-header_separate {
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: -10px;
+        transform: translateY(-50%);
+
+        width: 2px;
+        height: 24px;
+        background-color: var(--text-dark);
+    }
+}
+
+.modal-content {
+    position: relative;
+    width: 750px;
+    background-color: white;
+    padding: 30px 20px;
+    border-radius: 10px;
+}
+
+.modal-close {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+
+    display: flex;
+    font-size: 2rem;
+    color: var(--text-dark-alpha);
+    background: white;
+    padding: 4px;
+    border-radius: 9999px;
+    border: 3px solid var(--dark-alpha-bg);
+
+    &:hover {
+        color: var(--blue);
+    }
+}
+
+// form
+.form-title {
+    font-weight: 500;
+}
+
+.checkbox-group {
+    margin-bottom: 10px;
+
+    .checkbox-label {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 10px;
+    }
+
+    input {
+        margin-top: 6px;
+    }
+
+    .checkbox-description {
+        margin-left: 10px;
+    }
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 10px;
+}
+
+.error-message {
+    color: red;
+    font-size: 1.4rem;
+}
+
+.forgot-password {
+    float: right;
+    font-size: 1.4rem;
+    text-decoration: underline;
+    margin-top: -6px;
+
+    &:hover {
+        color: var(--blue);
+    }
+}
