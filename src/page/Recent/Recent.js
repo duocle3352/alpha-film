@@ -10,12 +10,12 @@ function Recent() {
     const recentList = JSON.parse(localStorage.getItem(LIST_RECENT));
 
     return (
-        <section className={cx('wrapper')}>
+        <section>
             <AlphaTitle title="Recent" />
             {recentList ? (
                 <ul className={cx('row', 'sm-gutter')}>
                     {recentList.map((item) => (
-                        <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'c-3')}>
+                        <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'm-3', 'c-6')}>
                             <Card item={item} type={item.type} />
                         </li>
                     ))}

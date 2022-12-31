@@ -1,15 +1,18 @@
-.list {
+.list-item {
+    display: flex;
     transition: all linear 0.4s;
 }
 
 .item {
     display: flex !important;
     position: relative;
+    min-width: 100%;
     margin-bottom: 30px;
 }
 
 .img {
     width: 100%;
+    filter: brightness(0.5);
 }
 
 .display {
@@ -77,4 +80,46 @@
 .btn {
     display: flex;
     align-items: center;
+}
+
+// responsive
+
+/* mobile & tablet */
+@media (max-width: 1022px) {
+    .info {
+        width: 50%;
+    }
+}
+
+/* tablet */
+@media (min-width: 740px) and (max-width: 1023px) {
+}
+
+/* mobile */
+@media (max-width: 739px) {
+    .title {
+        font-size: 2rem;
+        line-height: 2.2rem;
+    }
+
+    .info {
+        right: unset;
+        left: 22px;
+        width: 90%;
+    }
+
+    .genres {
+        height: 36px;
+        overflow: hidden;
+    }
+
+    .desc {
+        -webkit-line-clamp: 2;
+    }
+
+    .btn {
+        span {
+            font-size: 1.4rem;
+        }
+    }
 }

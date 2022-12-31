@@ -73,6 +73,8 @@
 }
 
 .result-info {
+    flex: 1;
+
     p {
         color: var(--text-dark-alpha);
         font-weight: 500;
@@ -96,5 +98,31 @@
         &:hover {
             color: var(--blue);
         }
+    }
+}
+
+// responsive
+/* mobile & tablet */
+@media (max-width: 1023px) {
+    .wrapper {
+        margin: unset;
+    }
+
+    .result {
+        width: 97vw;
+    }
+}
+
+/* tablet */
+@media (min-width: 740px) and (max-width: 1023px) {
+    .result {
+        width: 99vw;
+    }
+}
+
+/* mobile */
+@media (max-width: 739px) {
+    .result {
+        width: 98vw;
     }
 }

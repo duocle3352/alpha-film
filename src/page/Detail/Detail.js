@@ -104,15 +104,40 @@ function Detail() {
             theme: 'dark',
         });
 
+    const listCreator = (data) => {
+        return (
+            <ul className={cx('creator')}>
+                {data.created_by &&
+                    data.created_by.map((creator) => (
+                        <li key={creator.id}>
+                            <h4 className={cx('creator-title')}>{creator.name}</h4>
+                            <span>Creator</span>
+                        </li>
+                    ))}
+            </ul>
+        );
+    };
+
+    const listGenre = (data) => {
+        return (
+            data.genres &&
+            data.genres.map((genre) => (
+                <span className={cx('genre')} key={genre.id}>
+                    {genre.name}
+                </span>
+            ))
+        );
+    };
+
     return (
         <section className="row">
             {/* header */}
             <section className={cx('original_header')}>
                 <ImageOriginal className={cx('backdrop')} path={data.backdrop_path} alt={name} />
-                <div className={cx('poster-box', 'col', 'l-3', 'c-3')}>
+                <div className={cx('poster-box', 'col', 'l-3', 'm-3', 'c-0')}>
                     <Image className={cx('poster')} path={poster} alt={name} />
                 </div>
-                <div className={cx('info', 'col', 'l-9', 'c-9')}>
+                <div className={cx('info', 'col', 'l-9', 'm-9', 'c-0')}>
                     <h1>{name}</h1>
                     <div className={cx('subtitle')}>
                         <span className={cx('type')}>{type}</span>
@@ -121,12 +146,7 @@ function Detail() {
                             {`${voteAverage.toFixed(1)}/10`}
                             <FaStar />
                         </span>
-                        {data.genres &&
-                            data.genres.map((genre) => (
-                                <span className={cx('genre')} key={genre.id}>
-                                    {genre.name}
-                                </span>
-                            ))}
+                        {listGenre(data)}
                     </div>
                     <div className={cx('action')}>
                         <Button primary small leftIcon={<FaPlay />} onClick={notify}>
@@ -137,40 +157,79 @@ function Detail() {
                         </Button>
                     </div>
                     <p className={cx('description')}>{data.overview}</p>
-                    <ul className={cx('creator')}>
-                        {data.created_by &&
-                            data.created_by.map((creator) => (
-                                <li key={creator.id}>
-                                    <h4>{creator.name}</h4>
-                                    <span>Creator</span>
-                                </li>
-                            ))}
-                    </ul>
+                    {listCreator(data)}
                 </div>
+
+                {/* original_header-inner__on-mobile */}
+                <div className={cx('original_header__on-mobile')}>
+                    <div className={cx('original_header-inner')}>
+                        <Image className={cx('poster')} path={poster} alt={name} />
+
+                        <div className={cx('info')}>
+                            <h2>{name}</h2>
+                            <div className={cx('subtitle')}>
+                                <span className={cx('type')}>{type}</span>
+                                <span className={cx('release-date')}>{releaseDate}</span>
+                                <span className={cx('rate')}>
+                                    {`${voteAverage.toFixed(1)}/10`}
+                                    <FaStar />
+                                </span>
+                            </div>
+                            {listCreator(data)}
+                            {/* genes */}
+                            <div className={cx('list-genre')}>{listGenre(data)}</div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* tag line */}
                 {tagline && <p className={cx('tagLine')}>{`"${tagline}"`}</p>}
             </section>
+
+            {/* description on mobile */}
+            <p className={cx('description-on-mobile')}>{data.overview}</p>
 
             {/* media */}
             <section className={cx('content')}>
                 <AlphaTitle title="Media">
-                    <Button primary={isVideos} text={!isVideos} onClick={() => handleSetMediaType('videos')}>
-                        Videos
-                        <span className={cx('media-quantity')}>{lisVideo.length}</span>
-                    </Button>
-                    <Button primary={isBackdrops} text={!isBackdrops} onClick={() => handleSetMediaType('backdrops')}>
-                        BackDrops
-                        <span className={cx('media-quantity')}>{listBackdrop.length}</span>
-                    </Button>
-                    <Button primary={isPosters} text={!isPosters} onClick={() => handleSetMediaType('posters')}>
-                        Posters
-                        <span className={cx('media-quantity')}>{listPoster.length}</span>
-                    </Button>
+                    <div className={cx('media-control-box')}>
+                        <Button
+                            className={cx('media-control')}
+                            small
+                            primary={isVideos}
+                            text={!isVideos}
+                            onClick={() => handleSetMediaType('videos')}
+                        >
+                            Videos
+                            <span className={cx('media-quantity')}>{lisVideo.length}</span>
+                        </Button>
+                        <Button
+                            className={cx('media-control')}
+                            small
+                            primary={isBackdrops}
+                            text={!isBackdrops}
+                            onClick={() => handleSetMediaType('backdrops')}
+                        >
+                            BackDrops
+                            <span className={cx('media-quantity')}>{listBackdrop.length}</span>
+                        </Button>
+                        <Button
+                            className={cx('media-control')}
+                            small
+                            primary={isPosters}
+                            text={!isPosters}
+                            onClick={() => handleSetMediaType('posters')}
+                        >
+                            Posters
+                            <span className={cx('media-quantity')}>{listPoster.length}</span>
+                        </Button>
+                    </div>
                 </AlphaTitle>
 
                 <ul className={cx('media-list-cart', 'row', 'sm-gutter')}>
                     {isVideos &&
                         lisVideo.map((video) => (
-                            <li key={video.id} className="col l-6">
+                            <li key={video.id} className="col l-6 m-6 c-12">
                                 <iframe
                                     width="100%"
                                     height="330px"
@@ -184,7 +243,7 @@ function Detail() {
 
                     {isBackdrops &&
                         listBackdrop.map((backdrop, index) => (
-                            <li key={index} className="col l-6">
+                            <li key={index} className="col l-6 m-6 c-12">
                                 <div className={cx('media-cart')}>
                                     <ImageOriginal
                                         path={backdrop.file_path}
@@ -197,7 +256,7 @@ function Detail() {
 
                     {isPosters &&
                         listPoster.map((backdrop, index) => (
-                            <li key={index} className="col l-2">
+                            <li key={index} className="col l-2 m-3 c-6">
                                 <div className={cx('media-cart')}>
                                     <Image path={backdrop.file_path} alt="backdrop" className={cx('media-image')} />
                                 </div>
@@ -212,7 +271,7 @@ function Detail() {
                 <ul className={cx('media-list-cart', 'row', 'sm-gutter')}>
                     {data?.credits?.cast &&
                         data.credits.cast.map((cast) => (
-                            <li key={cast.id} className="col l-2">
+                            <li key={cast.id} className="col l-2 m-3 c-6">
                                 <div className={cx('media-cart')}>
                                     <Image path={cast.profile_path} alt={cast.name} className={cx('cart-image')} />
                                     <div className={cx('cart-info')}>
@@ -230,16 +289,22 @@ function Detail() {
             {currentSeason && data?.seasons && (
                 <section className={cx('content')}>
                     <AlphaTitle title="Season">
-                        <Button
-                            primary={isCurrentSeason}
-                            text={!isCurrentSeason}
-                            onClick={() => handleSetSeasonType('current')}
-                        >
-                            Current Season
-                        </Button>
-                        <Button primary={isFullSeason} text={!isFullSeason} onClick={() => handleSetSeasonType('full')}>
-                            Full Season
-                        </Button>
+                        <div>
+                            <Button
+                                primary={isCurrentSeason}
+                                text={!isCurrentSeason}
+                                onClick={() => handleSetSeasonType('current')}
+                            >
+                                Current Season
+                            </Button>
+                            <Button
+                                primary={isFullSeason}
+                                text={!isFullSeason}
+                                onClick={() => handleSetSeasonType('full')}
+                            >
+                                Full Season
+                            </Button>
+                        </div>
                     </AlphaTitle>
 
                     {isCurrentSeason && (
@@ -259,7 +324,7 @@ function Detail() {
                     {isFullSeason && (
                         <ul className={cx('media-list-cart', 'row', 'sm-gutter')}>
                             {data.seasons.map((season) => (
-                                <li key={season.id} className="col l-2">
+                                <li key={season.id} className="col l-2 m-3 c-6">
                                     <div className={cx('media-cart')}>
                                         <Image
                                             path={season.poster_path}
@@ -396,7 +461,7 @@ function Detail() {
                             {data.recommendations.results.map((item) => (
                                 <li
                                     key={item.id}
-                                    className={cx('recommend-cart-item', 'col', 'l-2', 'c-3')}
+                                    className={cx('recommend-cart-item', 'col', 'l-2', 'm-3', 'c-6')}
                                     ref={recommendRef}
                                 >
                                     <Card item={item} type={item.media_type} />

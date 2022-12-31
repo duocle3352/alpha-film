@@ -38,7 +38,7 @@ function Search() {
         <HeadlessTippy
             visible={searchResults.length > 0 && showResults}
             interactive
-            placement="bottom"
+            placement="auto"
             onClickOutside={() => setShowResults(false)}
             render={(attrs) => (
                 <div className={cx('result')} tabIndex="-1" {...attrs}>

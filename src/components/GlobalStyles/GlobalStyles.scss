@@ -33,7 +33,7 @@
 
     // size
     --header-hight: 56px;
-    --header-margin: 50px;
+    --header-margin: 20px;
     --sidebar-width: 240px;
 }
 
@@ -54,7 +54,7 @@ body {
     text-rendering: optimizespeed;
     color: var(--text-color);
     // background-color: #181818;
-    overflow-y: overlay;
+    overflow: overlay;
     cursor: default;
 }
 
@@ -94,6 +94,7 @@ a {
 ul {
     list-style: none;
 }
+
 .nowrap {
     flex-wrap: nowrap;
 }

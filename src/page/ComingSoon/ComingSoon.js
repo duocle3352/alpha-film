@@ -77,13 +77,13 @@ function ComingSoon() {
     };
 
     return (
-        <div className={cx('wrapper')}>
+        <div>
             {/* slide */}
             {comingSoonData.length > 0 && (
                 <div className={cx('slide-box')}>
                     {/* backdrop */}
                     <ImageOriginal
-                        className={cx('slide-img')}
+                        className={cx('slide-backdrop')}
                         path={slideImg || comingSoonData[0].backdrop_path}
                         alt={comingSoonData[0].title || comingSoonData[0].name}
                     />
@@ -96,9 +96,7 @@ function ComingSoon() {
                         />
                         <div className={cx('slide-info__inner')}>
                             {/* title */}
-                            <h1 className={cx('slide-title')}>
-                                {comingSoonData[0].title || comingSoonData[0].name}
-                            </h1>
+                            <h1 className={cx('slide-title')}>{comingSoonData[0].title || comingSoonData[0].name}</h1>
                             {/* genres */}
                             <Genres ids={comingSoonData[0].genre_ids} type={mediaType} />
                             {/* date */}
@@ -133,10 +131,57 @@ function ComingSoon() {
                             </div>
                         </div>
                     </div>
+
+                    {/* slide-info__on-mobile */}
+                    <div className={cx('slide-info__on-mobile')}>
+                        <div className={cx('slide-info-inner__on-mobile')}>
+                            {/* poster */}
+                            <Image
+                                className={cx('slide-poster')}
+                                path={comingSoonData[0]?.poster_path}
+                                alt={comingSoonData[0].title || comingSoonData[0].name}
+                            />
+                            <div>
+                                {/* title */}
+                                <h2 className={cx('slide-title')}>
+                                    {comingSoonData[0].title || comingSoonData[0].name}
+                                </h2>
+                                {/* genres */}
+                                <Genres ids={comingSoonData[0].genre_ids} type={mediaType} />
+                                {/* date */}
+                                <p className={cx('slide-date')}>
+                                    <span>
+                                        <MdDateRange />
+                                    </span>
+                                    {comingSoonData[0].release_date || comingSoonData[0].first_air_date}
+                                </p>
+                                {/* rate */}
+                                <p className={cx('slide-rate')}>
+                                    <span>
+                                        <AiOutlineStar />
+                                    </span>
+                                    {`${comingSoonData[0].vote_average.toFixed(1)}/10`}
+                                </p>
+                            </div>
+                        </div>
+                        {/* description */}
+                        <p className={cx('slide-dsc')}>{comingSoonData[0].overview}</p>
+
+                        {/* button */}
+                        <div className={cx('slide-btn')}>
+                            <Button to={`/${mediaType}/${comingSoonData[0].id}`} primary>
+                                Learn More
+                            </Button>
+                            <Button to={`/${mediaType}/${comingSoonData[0].id}`} outline leftIcon={<BsPlayCircle />}>
+                                Play Trailer
+                            </Button>
+                        </div>
+                    </div>
+
                     {/* mini image */}
                     <div className={cx('slide-box__inner')}>
                         <MediaImages
-                            className={cx('slide-img__sb')}
+                            className={cx('slide-backdrop__sb')}
                             type={mediaType}
                             id={comingSoonData[0]?.id}
                             currentSlide={slideImg}
@@ -152,7 +197,7 @@ function ComingSoon() {
             {/* cart-item */}
             <ul className={cx('row', 'sm-gutter')}>
                 {comingSoonData.map((item) => (
-                    <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'c-3')}>
+                    <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'm-3', 'c-6')}>
                         <Card item={item} type={mediaType} />
                     </li>
                 ))}
@@ -162,7 +207,7 @@ function ComingSoon() {
             <Pagination
                 totalPageCount={totalPage}
                 currentPage={Number(params.page) || 1}
-                siblingCount={2}
+                siblingCount={1}
                 page={pageParam}
             />
         </div>

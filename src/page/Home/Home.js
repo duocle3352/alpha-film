@@ -128,15 +128,12 @@ function Home() {
                     display={1}
                     step={1}
                     delay={5000}
-                    auto
+                    // auto
                 />
             </section>
 
             {/* popular */}
-            <section
-                className={cx('wrapper')}
-                style={{ backgroundImage: `url(${images.popularBg})` }}
-            >
+            <section className={cx('wrapper')} style={{ backgroundImage: `url(${images.popularBg})` }}>
                 <AlphaTitle title="What's Popular">
                     <Selector
                         optionI="In Theaters"
@@ -158,7 +155,7 @@ function Home() {
                         moviePopular.map((item) => (
                             <li
                                 key={item.id}
-                                className={cx('cart-item', 'col', 'l-2', 'c-3')}
+                                className={cx('cart-item', 'col', 'l-2', 'm-3', 'c-6')}
                                 ref={popularCartRef}
                             >
                                 <Card item={item} type="movie" />
@@ -168,7 +165,7 @@ function Home() {
                         tvPopular.map((item) => (
                             <li
                                 key={item.id}
-                                className={cx('cart-item', 'col', 'l-2', 'c-2')}
+                                className={cx('cart-item', 'col', 'l-2', 'm-3', 'c-6')}
                                 ref={popularCartRef}
                             >
                                 <Card item={item} type="tv" />
@@ -189,27 +186,20 @@ function Home() {
             {/* trending */}
             <section className={cx('wrapper')}>
                 <AlphaTitle title="trending">
-                    <Selector
-                        optionI="Day"
-                        optionII="Week"
-                        selectOptionI={showDayTrend}
-                        onSelect={handleShowTrend}
-                    />
+                    <Selector optionI="Day" optionII="Week" selectOptionI={showDayTrend} onSelect={handleShowTrend} />
                 </AlphaTitle>
 
                 {/* trending media cart */}
-                <ul
-                    className={cx({ more: showTrendMore }, 'list-item', 'less', 'row', 'sm-gutter')}
-                >
+                <ul className={cx({ more: showTrendMore }, 'list-item', 'less', 'row', 'sm-gutter')}>
                     {showDayTrend &&
                         dayTrending.map((item) => (
-                            <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'c-3')}>
+                            <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'm-3', 'c-6')}>
                                 <Card item={item} />
                             </li>
                         ))}
                     {!showDayTrend &&
                         weekTrending.map((item) => (
-                            <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'c-3')}>
+                            <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'm-3', 'c-6')}>
                                 <Card item={item} />
                             </li>
                         ))}
@@ -245,13 +235,13 @@ function Home() {
                 <ul className={cx('list-item', 'row', 'sm-gutter')}>
                     {showMovie &&
                         movieTopRate.map((item) => (
-                            <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'c-3')}>
+                            <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'm-3', 'c-6')}>
                                 <Card item={item} type="movie" />
                             </li>
                         ))}
                     {!showMovie &&
                         tvTopRate.map((item) => (
-                            <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'c-3')}>
+                            <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'm-3', 'c-6')}>
                                 <Card item={item} type="tv" />
                             </li>
                         ))}

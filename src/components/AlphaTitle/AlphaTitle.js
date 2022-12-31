@@ -8,7 +8,7 @@ const cx = classNames.bind(style);
 
 function AlphaTitle({ title, link, children }) {
     return (
-        <div className={cx('header')}>
+        <div className={cx('wrapper')}>
             <div className={cx('inner')}>
                 <h2 className={cx('title')}>{title.replace(/-/g, ' ')}</h2>
                 {children}

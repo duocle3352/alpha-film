@@ -25,12 +25,12 @@ function Search() {
     }, [params]);
 
     return (
-        <section className={cx('wrapper')}>
+        <section>
             <AlphaTitle title={`Search results: ${params.value}`} />
 
             <ul className={cx('row', 'sm-gutter')}>
                 {searchResults.map((item) => (
-                    <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'c-3')}>
+                    <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'm-3', 'c-6')}>
                         <Card item={item} type={item.type} />
                     </li>
                 ))}
@@ -39,7 +39,7 @@ function Search() {
             <Pagination
                 totalPageCount={totalPageResult}
                 currentPage={Number(params.page) || 1}
-                siblingCount={2}
+                siblingCount={1}
                 page={`search/${params.value}`}
             />
         </section>

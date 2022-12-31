@@ -26,3 +26,17 @@
         color: var(--blue);
     }
 }
+
+/* mobile & tablet */
+/* tablet */
+/* mobile & tablet */
+@media (max-width: 1022px) {
+    .wrapper {
+        justify-content: flex-end;
+    }
+
+    .logo,
+    .link-content {
+        margin-bottom: 20px;
+    }
+}

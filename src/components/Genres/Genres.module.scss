@@ -1,5 +1,6 @@
 .wrapper {
     display: flex;
+    flex-wrap: wrap;
     padding-bottom: 10px;
 }
 
@@ -8,6 +9,7 @@
     font-weight: 700;
     background-color: var(--dark-alpha-bg);
     padding: 0 6px;
+    margin: 6px 0;
     border: 1px solid var(--blue);
     border-radius: 999px;
 }

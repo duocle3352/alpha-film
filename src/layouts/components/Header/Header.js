@@ -1,10 +1,13 @@
 /* eslint-disable no-unused-vars */
 import classNames from 'classnames/bind';
 import { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { BsSun, BsMoonStars } from 'react-icons/bs';
+import HeadlessTippy from '@tippyjs/react/headless';
 import { BiHelpCircle, BiCommentError } from 'react-icons/bi';
 import { AiOutlineUser, AiOutlineSetting, AiOutlineLogout, AiOutlineClose } from 'react-icons/ai';
-import HeadlessTippy from '@tippyjs/react/headless';
+import { HiMenu } from 'react-icons/hi';
+import { useDispatch } from 'react-redux';
 
 import config from '~/config';
 import images from '~/assets/image';
@@ -13,6 +16,7 @@ import { Navbar } from '~/components/Navbar';
 import { NavbarItem } from '~/components/NavbarItem';
 import { Search } from '~/components/Search';
 import { Button } from '~/components/Button';
+import { showSidebar } from '~/features/sidebarSlice';
 import RegisterFrom from './RegisterForm';
 import SignInForm from './SignInForm';
 import style from './Header.module.scss';
@@ -20,6 +24,8 @@ import style from './Header.module.scss';
 const cx = classNames.bind(style);
 
 function Header() {
+    const dispatch = useDispatch();
+
     const [isDarkTheme, setIsDarkTheme] = useState(false);
     const [isSignInModal, setIsSignInModal] = useState(false);
     const [isRegister, setIsRegister] = useState(false);
@@ -47,12 +53,31 @@ function Header() {
         setIsRegister(true);
     };
 
+    const handleShowSidebar = () => {
+        dispatch(showSidebar());
+    };
+
     return (
-        <header className={cx('wrapper', 'row')}>
-            <div className="col l-9">
+        <div className={cx('wrapper', 'row')}>
+            {/* Logo on tablet and mobile*/}
+            <div className={cx('col', 'l-0', 'm-4', 'c-7')}>
+                <div className={cx('logo-content')}>
+                    <Link to={config.routes.home} className={cx('logo-link')}>
+                        <img src={images.logo} alt={'New-Film logo'} className={cx('logo-img')} />
+                    </Link>
+                </div>
+
+                {/* close sidebar button on tablet and mobile */}
+                <button className={cx('menu-toggle')} onClick={handleShowSidebar}>
+                    <HiMenu />
+                </button>
+            </div>
+
+            <div className="col l-9 m-5 c-0">
                 <Search />
             </div>
-            <div className="col l-3">
+
+            <div className="col l-3 m-3 c-5">
                 <div className={cx('tool-content')}>
                     {/* theme */}
                     <button className={cx('theme')} onClick={handleToggleTheme}>
@@ -132,7 +157,7 @@ function Header() {
                     </HeadlessTippy> */}
                 </div>
             </div>
-        </header>
+        </div>
     );
 }
 

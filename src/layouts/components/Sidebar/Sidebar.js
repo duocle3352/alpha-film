@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { BiBookBookmark, BiHelpCircle, BiMovie, BiTimeFive } from 'react-icons/bi';
 import { FiChevronDown } from 'react-icons/fi';
 import { BsDisplay } from 'react-icons/bs';
+import { HiMenu } from 'react-icons/hi';
 import {
     AiOutlineHome,
     AiOutlineFieldTime,
@@ -17,15 +18,24 @@ import images from '~/assets/image';
 import { Navbar } from '~/components/Navbar';
 import { NavbarItem } from '~/components/NavbarItem';
 import { MV_THEATRES, TV_AIRING, TV_ON_THE_AIR, MV_COMING, TV_COMING } from '~/constans';
+import { useDispatch, useSelector } from 'react-redux';
+import { hideSidebar } from '~/features/sidebarSlice';
 import style from './Sidebar.module.scss';
 
 const cx = classNames.bind(style);
 
 function Sidebar() {
+    const dispatch = useDispatch();
+    const isShowSidebar = useSelector((state) => state.sidebar);
+
     const [isDiscovery, setIsDiscovery] = useState(false);
     const [isComingSoon, setIsComingSoon] = useState(false);
 
-    const handleShow = (type) => {
+    const handleHideSidebar = () => {
+        dispatch(hideSidebar());
+    };
+
+    const handleShowNavbarItem = (type) => {
         if (type === 'discovery') {
             setIsDiscovery(true);
             setIsComingSoon(false);
@@ -35,28 +45,39 @@ function Sidebar() {
             setIsComingSoon(true);
         }
     };
-    const handleHide = () => {
+
+    const handleHideNavbarItem = () => {
         setIsDiscovery(false);
         setIsComingSoon(false);
     };
 
     return (
-        <aside className={cx('wrapper')}>
+        <aside className={cx('wrapper', { show: isShowSidebar })}>
             {/* Logo */}
-            <section className={cx('logo-content')}>
+            <div className={cx('logo-content')}>
                 <Link to={config.routes.home} className={cx('logo-link')}>
                     <img src={images.logo} alt={'New-Film logo'} className={cx('logo-img')} />
                 </Link>
-            </section>
+            </div>
+
+            {/* close sidebar button on tablet and mobile */}
+            <button className={cx('menu-toggle')} onClick={handleHideSidebar}>
+                <HiMenu />
+            </button>
 
             {/* navbar */}
             <nav className={cx('navbar')}>
                 <Navbar separate>
-                    <NavbarItem title="Home" to={config.routes.home} leftIcon={<AiOutlineHome />} onHide={handleHide} />
+                    <NavbarItem
+                        title="Home"
+                        to={config.routes.home}
+                        leftIcon={<AiOutlineHome />}
+                        onHide={handleHideNavbarItem}
+                    />
 
                     <div
                         className={cx('navbar-children', { show: isDiscovery })}
-                        onClick={() => handleShow('discovery')}
+                        onClick={() => handleShowNavbarItem('discovery')}
                     >
                         <span className={cx('navbar-icon', 'icon-right')}>
                             <FiChevronDown />
@@ -80,7 +101,10 @@ function Sidebar() {
                         </div>
                     </div>
 
-                    <div className={cx('navbar-children', { show: isComingSoon })} onClick={() => handleShow('coming')}>
+                    <div
+                        className={cx('navbar-children', { show: isComingSoon })}
+                        onClick={() => handleShowNavbarItem('coming')}
+                    >
                         <span className={cx('navbar-icon', 'icon-right')}>
                             <FiChevronDown />
                         </span>
@@ -98,19 +122,19 @@ function Sidebar() {
                     </div>
                 </Navbar>
 
-                <Navbar separate onHide={handleHide}>
+                <Navbar separate onHide={handleHideNavbarItem}>
                     <NavbarItem title="Recent" to={config.routes.recent} leftIcon={<BiTimeFive />} />
                     <NavbarItem title="Bookmarked" to={config.routes.bookmark} leftIcon={<BiBookBookmark />} />
                     <NavbarItem title="Downloaded" to={config.routes.download} leftIcon={<AiOutlineDownload />} />
                 </Navbar>
 
-                <Navbar onHide={handleHide}>
+                <Navbar onHide={handleHideNavbarItem}>
                     <NavbarItem title="Settings" to={config.routes.setting} leftIcon={<AiOutlineSetting />} />
                     <NavbarItem title="Help" to={config.routes.help} leftIcon={<BiHelpCircle />} />
                 </Navbar>
             </nav>
             {/* make by */}
-            <p className={cx('text')}>2020.By DuocLe</p>
+            <p className={cx('text')}>2022.By DuocLe</p>
         </aside>
     );
 }

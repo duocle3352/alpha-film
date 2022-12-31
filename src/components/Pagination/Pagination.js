@@ -28,7 +28,7 @@ function Pagination({ totalPageCount, currentPage, siblingCount = 1, page, class
 
     return (
         <div
-            className={cx('pagination-container', 'l-8', 'l-o-2', 'm-12', 'c-12', {
+            className={cx('pagination-container', 'l-8', 'l-o-2', 'm-o-1', 'm-10', 'c-12', {
                 [className]: className,
             })}
         >
@@ -50,10 +50,7 @@ function Pagination({ totalPageCount, currentPage, siblingCount = 1, page, class
                 keyNumber += DOTS;
                 if (pageNumber === DOTS) {
                     return (
-                        <span
-                            key={`${pageNumber}${keyNumber}`}
-                            className={cx('pagination-item', 'dots')}
-                        >
+                        <span key={`${pageNumber}${keyNumber}`} className={cx('pagination-item', 'dots')}>
                             &#8230;
                         </span>
                     );

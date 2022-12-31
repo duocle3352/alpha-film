@@ -2,12 +2,8 @@
     display: flex;
     align-items: center;
 
-    position: fixed;
-    left: 240px;
-    right: 0;
     height: var(--header-hight);
     background-color: var(--white);
-    z-index: 999;
 }
 
 // tool place
@@ -64,6 +60,7 @@
     bottom: 0px;
     left: 0px;
     right: 0px;
+    z-index: 9999;
 
     display: none;
     align-items: center;
@@ -84,7 +81,7 @@
 }
 
 .modal-header.active {
-    font-size: 2rem;
+    font-size: 1.8rem;
     text-decoration: underline;
 }
 
@@ -109,6 +106,7 @@
     width: 750px;
     background-color: white;
     padding: 30px 20px;
+    margin: 0 10px;
     border-radius: 10px;
 }
 
@@ -173,5 +171,51 @@
 
     &:hover {
         color: var(--blue);
+    }
+}
+
+// responsive
+/* mobile & tablet */
+@media (max-width: 1023px) {
+    .logo-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: var(--header-hight);
+        padding-left: 20px;
+    }
+
+    .logo-link {
+        display: block;
+        width: 160px;
+        margin-left: 30px;
+    }
+
+    .logo-img {
+        width: 100%;
+    }
+
+    .menu-toggle {
+        display: block;
+        position: fixed;
+        top: 10px;
+        left: 20px;
+        font-size: 3rem;
+    }
+
+    .tool-content {
+        margin: unset;
+        padding: 0 20px;
+    }
+}
+
+/* tablet */
+@media (min-width: 740px) and (max-width: 1023px) {
+}
+
+/* mobile */
+@media (max-width: 739px) {
+    .wrapper {
+        // height: 100px;
     }
 }

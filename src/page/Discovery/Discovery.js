@@ -74,7 +74,7 @@ function Discovery() {
                     <AlphaTitle title={MV_THEATRES} />
                     <ul className={cx('row', 'sm-gutter')}>
                         {movieNowPlaying.map((item) => (
-                            <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'c-3')}>
+                            <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'm-3', 'c-6')}>
                                 <Card item={item} type="movie" />
                             </li>
                         ))}
@@ -87,7 +87,7 @@ function Discovery() {
                     <AlphaTitle title={TV_AIRING} />
                     <ul className={cx('row', 'sm-gutter')}>
                         {tvAiringToday.map((item) => (
-                            <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'c-3')}>
+                            <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'm-3', 'c-6')}>
                                 <Card item={item} type="tv" />
                             </li>
                         ))}
@@ -100,7 +100,7 @@ function Discovery() {
                     <AlphaTitle title={TV_ON_THE_AIR} />
                     <ul className={cx('row', 'sm-gutter')}>
                         {tvOnTheAir.map((item) => (
-                            <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'c-3')}>
+                            <li key={item.id} className={cx('cart-item', 'col', 'l-2-4', 'm-3', 'c-6')}>
                                 <Card item={item} type="tv" />
                             </li>
                         ))}
@@ -111,7 +111,7 @@ function Discovery() {
             <Pagination
                 totalPageCount={totalPage}
                 currentPage={Number(params.page) || 1}
-                siblingCount={2}
+                siblingCount={1}
                 page={pageParam}
             />
         </section>
