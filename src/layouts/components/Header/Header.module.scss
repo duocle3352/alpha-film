@@ -223,6 +223,12 @@
         padding: 10px 6px;
     }
 
+    .checkbox-label {
+        input {
+            min-width: 14px;
+        }
+    }
+
     .radio-group {
         flex-direction: row;
 
