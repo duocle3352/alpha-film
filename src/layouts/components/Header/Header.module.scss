@@ -215,7 +215,19 @@
 
 /* mobile */
 @media (max-width: 739px) {
+    .modal-header {
+        margin-bottom: 10px;
+    }
+
     .modal-content {
         padding: 10px 6px;
+    }
+
+    .radio-group {
+        flex-direction: row;
+
+        label {
+            margin-right: 20px;
+        }
     }
 }
